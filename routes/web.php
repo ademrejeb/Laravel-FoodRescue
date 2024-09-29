@@ -44,6 +44,8 @@ use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 use App\Http\Controllers\DonatorController;
+use App\Http\Controllers\CollecteController;
+use App\Http\Controllers\LivraisonController;
 
 
 // Main Page Route
@@ -116,5 +118,5 @@ Route::get('/donatorslist', [DonatorController::class, 'index'])->name('donators
 Route::put('/donatorslist', [DonatorController::class, 'edit'])->name('donators.edit');
 Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('donators.destroy');
 
-
-///
+Route::resource('collectes', CollecteController::class);
+Route::resource('livraisons', LivraisonController::class);
