@@ -115,3 +115,6 @@ Route::post('/donatorsform', [DonatorController::class, 'store'])->name('donator
 Route::get('/donatorslist', [DonatorController::class, 'index'])->name('donators.index');
 Route::put('/donatorslist', [DonatorController::class, 'edit'])->name('donators.edit');
 Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('donators.destroy');
+
+
+//
