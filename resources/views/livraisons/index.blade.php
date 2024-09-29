@@ -1,5 +1,7 @@
 @extends('layouts.commonMaster')
 
+@section('title', 'Gestion des Livraisons')
+
 @section('layoutContent')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">

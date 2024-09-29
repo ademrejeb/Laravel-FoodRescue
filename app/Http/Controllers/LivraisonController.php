@@ -26,9 +26,17 @@ class LivraisonController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'collecte_id' => 'required',
-            'date_livraison' => 'required|date',
-            'statut' => 'required|string',
+            'collecte_id' => 'required|exists:collectes,id',
+            'date_livraison' => 'required|date|after_or_equal:today',
+            'statut' => 'required|string|in:en cours,livré',
+        ], [
+            'collecte_id.required' => 'La collecte associée est requise.',
+            'collecte_id.exists' => 'La collecte associée doit exister.',
+            'date_livraison.required' => 'La date de livraison est requise.',
+            'date_livraison.date' => 'La date de livraison doit être une date valide.',
+            'date_livraison.after_or_equal' => 'La date de livraison doit être aujourd\'hui ou dans le futur.',
+            'statut.required' => 'Le statut est requis.',
+            'statut.in' => 'Le statut doit être "en cours" ou "livré".',
         ]);
 
         Livraison::create($request->all());
@@ -52,9 +60,17 @@ class LivraisonController extends Controller
     public function update(Request $request, Livraison $livraison)
     {
         $request->validate([
-            'collecte_id' => 'required',
-            'date_livraison' => 'required|date',
-            'statut' => 'required|string',
+            'collecte_id' => 'required|exists:collectes,id',
+            'date_livraison' => 'required|date|after_or_equal:today',
+            'statut' => 'required|string|in:en cours,livré',
+        ], [
+            'collecte_id.required' => 'La collecte associée est requise.',
+            'collecte_id.exists' => 'La collecte associée doit exister.',
+            'date_livraison.required' => 'La date de livraison est requise.',
+            'date_livraison.date' => 'La date de livraison doit être une date valide.',
+            'date_livraison.after_or_equal' => 'La date de livraison doit être aujourd\'hui ou dans le futur.',
+            'statut.required' => 'Le statut est requis.',
+            'statut.in' => 'Le statut doit être "en cours" ou "livré".',
         ]);
 
         $livraison->update($request->all());

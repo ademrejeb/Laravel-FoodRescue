@@ -21,9 +21,13 @@ class CollecteController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'date_collecte' => 'required|date',
-            'statut' => 'required|string',
+            'date_collecte' => 'required|date|after:today', // Date doit être après aujourd'hui
+            'statut' => 'required|string|in:planifié,en cours,terminé', // Limiter les valeurs possibles
+        ], [
+            'date_collecte.after' => 'La date de collecte doit être une date future.',
+            'statut.in' => 'Le statut doit être l’un des suivants : planifié, en cours, terminé.',
         ]);
+
         Collecte::create($request->all());
         return redirect()->route('collectes.index')->with('success', 'Collecte créée avec succès.');
     }
@@ -41,9 +45,13 @@ class CollecteController extends Controller
     public function update(Request $request, Collecte $collecte)
     {
         $request->validate([
-            'date_collecte' => 'required|date',
-            'statut' => 'required|string',
+            'date_collecte' => 'required|date|after:today', // Date doit être après aujourd'hui
+            'statut' => 'required|string|in:planifié,en cours,terminé', // Limiter les valeurs possibles
+        ], [
+            'date_collecte.after' => 'La date de collecte doit être une date future.',
+            'statut.in' => 'Le statut doit être l’un des suivants : planifié, en cours, terminé.',
         ]);
+
         $collecte->update($request->all());
         return redirect()->route('collectes.index')->with('success', 'Collecte mise à jour avec succès.');
     }

@@ -92,7 +92,7 @@
     },
     {
       "name": "Collectes et Livraisons",
-      "icon": "menu-icon tf-icons bx bx-truck",
+      "icon": "menu-icon tf-icons bx bx-package",
       "slug": "collectes-livraisons",
       "submenu": [
         {
