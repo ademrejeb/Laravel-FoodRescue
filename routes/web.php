@@ -117,4 +117,4 @@ Route::put('/donatorslist', [DonatorController::class, 'edit'])->name('donators.
 Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('donators.destroy');
 
 
-//
+///
