@@ -91,6 +91,23 @@
       ]
     },
     {
+      "name": "Partenaires et sponsorships",
+      "icon": "menu-icon tf-icons bx bx-truck",
+      "slug": "Partenaires et sponsorships",
+      "submenu": [
+        {
+          "url": "/partenaires",
+          "name": "Partenaires", 
+          "slug": "partenaires"
+        },
+        {
+          "url": "/sponsorships",
+          "name": "Sponsorships",
+          "slug": "sponsorships"
+        }
+      ]
+    },
+    {
       "name": "Front Pages",
       "icon": "menu-icon tf-icons bx bx-store",
       "slug": "front-pages",
