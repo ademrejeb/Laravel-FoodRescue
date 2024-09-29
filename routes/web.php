@@ -15,6 +15,7 @@ use App\Http\Controllers\pages\MiscUnderMaintenance;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\authentications\ForgotPasswordBasic;
+use App\Http\Controllers\BenificaireController;
 use App\Http\Controllers\cards\CardBasic;
 use App\Http\Controllers\user_interface\Accordion;
 use App\Http\Controllers\user_interface\Alerts;
@@ -115,3 +116,10 @@ Route::post('/donatorsform', [DonatorController::class, 'store'])->name('donator
 Route::get('/donatorslist', [DonatorController::class, 'index'])->name('donators.index');
 Route::put('/donatorslist', [DonatorController::class, 'edit'])->name('donators.edit');
 Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('donators.destroy');
+Route::get('/benificaires', [BenificaireController::class, 'index'])->name('benificaires.index');
+Route::get('/benificaires/create', [BenificaireController::class, 'create'])->name('benificaires.create'); 
+Route::post('/benificaires', [BenificaireController::class, 'store'])->name('benificaires.store'); 
+Route::get('/benificaires/{id}', [BenificaireController::class, 'show'])->name('benificaires.show');
+Route::get('/benificaires/{id}/edit', [BenificaireController::class, 'edit'])->name('benificaires.edit');
+Route::put('/benificaires/{id}', [BenificaireController::class, 'update'])->name('benificaires.update'); 
+Route::delete('/benificaires/{id}', [BenificaireController::class, 'destroy'])->name('benificaires.destroy'); 
