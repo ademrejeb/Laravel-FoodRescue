@@ -120,3 +120,6 @@ Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('don
 
 Route::resource('collectes', CollecteController::class);
 Route::resource('livraisons', LivraisonController::class);
+
+
+//
