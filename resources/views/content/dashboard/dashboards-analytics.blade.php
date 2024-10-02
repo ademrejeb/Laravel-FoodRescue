@@ -14,7 +14,7 @@
 <script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
 @endsection
 
-@section('content')
+@section('layoutContent')
 <div class="row">
   <div class="col-lg-12 mb-4 order-0">
     <div class="card">
