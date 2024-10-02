@@ -1,8 +1,8 @@
-@extends('layouts.contentNavbarLayout')
+@extends('layouts.commonMaster')
 
 @section('title', 'Tables - Partenaires List')
 
-@section('content')
+@section('layoutContent')
 <h4 class="py-3 mb-4">
   <span class="text-muted fw-light">Tables /</span> Liste des Partenaires
 </h4>

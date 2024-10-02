@@ -1,8 +1,8 @@
-@extends('layouts.contentNavbarLayout')
+@extends('layouts.commonMaster')
 
 @section('title', 'Adding a new partner')
 
-@section('content')
+@section('layoutContent')
 <h4 class="py-3 mb-4">
   <span class="text-muted fw-light">Forms/</span> Adding a new partner
 </h4>

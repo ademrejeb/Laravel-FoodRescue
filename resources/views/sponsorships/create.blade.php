@@ -1,8 +1,7 @@
-@extends('layouts.contentNavbarLayout')
-
+@extends('layouts.commonMaster')
 @section('title', 'Ajouter un Sponsoring')
 
-@section('content')
+@section('layoutContent')
 <h4 class="py-3 mb-4">
   <span class="text-muted fw-light">Ajouter /</span> Sponsoring
 </h4>

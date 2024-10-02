@@ -1,8 +1,8 @@
-@extends('layouts.contentNavbarLayout')
+@extends('layouts.commonMaster')
 
 @section('title', 'Détails du Partenaire')
 
-@section('content')
+@section('layoutContent')
 <h4 class="py-3 mb-4">
   <span class="text-muted fw-light">Détails /</span> Partenaire: {{ $partenaire->nom }}
 </h4>

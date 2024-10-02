@@ -1,5 +1,5 @@
-@extends('layouts.contentNavbarLayout')
-@section('content')
+@extends('layouts.commonMaster')
+@section('layoutContent')
     <h1>Détails du Sponsoring</h1>
     <div class="card">
         <div class="card-header">
