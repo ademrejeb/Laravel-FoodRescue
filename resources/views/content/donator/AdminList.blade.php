@@ -1,8 +1,8 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts.commonMaster')
 
 @section('title', 'Tables - Donator List')
 
-@section('content')
+@section('layoutContent')
 <h4 class="py-3 mb-4">
   <span class="text-muted fw-light">Tables /</span> Donator List
 </h4>
@@ -34,13 +34,19 @@
           <td>{{ $donator->type }}</td>
           <td>
             <div class="dropdown">
-              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
+              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                <i class="bx bx-dots-vertical-rounded"></i>
+              </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('donators.edit', $donator->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                <a class="dropdown-item" href="{{ route('donators.edit', $donator->id) }}">
+                  <i class="bx bx-edit-alt me-1"></i> Edit
+                </a>
                 <form action="{{ route('donators.destroy', $donator->id) }}" method="POST" style="display:inline;">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i> Delete</button>
+                  <button type="submit" class="dropdown-item">
+                    <i class="bx bx-trash me-1"></i> Delete
+                  </button>
                 </form>
               </div>
             </div>
