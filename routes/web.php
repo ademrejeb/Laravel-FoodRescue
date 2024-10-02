@@ -116,6 +116,8 @@ Route::post('/donatorsform', [DonatorController::class, 'store'])->name('donator
 Route::get('/donatorslist', [DonatorController::class, 'index'])->name('donators.index');
 Route::put('/donatorslist', [DonatorController::class, 'edit'])->name('donators.edit');
 Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('donators.destroy');
+
+
 Route::get('/benificaires', [BenificaireController::class, 'index'])->name('benificaires.index');
 Route::get('/benificaires/create', [BenificaireController::class, 'create'])->name('benificaires.create'); 
 Route::post('/benificaires', [BenificaireController::class, 'store'])->name('benificaires.store'); 
