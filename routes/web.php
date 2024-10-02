@@ -46,6 +46,13 @@ use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 use App\Http\Controllers\DonatorController;
 
+use App\Http\Controllers\PartenaireController;
+use App\Http\Controllers\SponsorshipController;
+
+use App\Http\Controllers\CollecteController;
+use App\Http\Controllers\LivraisonController;
+
+
 
 // Main Page Route
 Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
@@ -125,3 +132,16 @@ Route::get('/benificaires/{id}', [BenificaireController::class, 'show'])->name('
 Route::get('/benificaires/{id}/edit', [BenificaireController::class, 'edit'])->name('benificaires.edit');
 Route::put('/benificaires/{id}', [BenificaireController::class, 'update'])->name('benificaires.update'); 
 Route::delete('/benificaires/{id}', [BenificaireController::class, 'destroy'])->name('benificaires.destroy'); 
+
+Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('donators.destroy');
+Route::resource('partenaires', PartenaireController::class);
+Route::resource('sponsorships', SponsorshipController::class);
+
+Route::delete('/donatorslist/{id}', [DonatorController::class, 'destroy'])->name('donators.destroy');
+
+Route::resource('collectes', CollecteController::class);
+Route::resource('livraisons', LivraisonController::class);
+
+
+//
+
