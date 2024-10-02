@@ -91,6 +91,23 @@
       ]
     },
     {
+      "name": "Partenaires et sponsorships",
+      "icon": "menu-icon tf-icons bx bx-truck",
+      "slug": "partenaires-et-sponsorships",
+      "submenu": [
+        {
+          "url": "/partenaires",
+          "name": "Partenaires",
+          "slug": "partenaires"
+        },
+        {
+          "url": "/sponsorships",
+          "name": "Sponsorships",
+          "slug": "sponsorships"
+        }
+      ]
+    },
+    {
       "name": "Collectes et Livraisons",
       "icon": "menu-icon tf-icons bx bx-package",
       "slug": "collectes-livraisons",
@@ -265,55 +282,32 @@
       "slug": "pages-misc",
       "submenu": [
         {
-          "url": "pages/misc-error",
-          "name": "Error",
-          "slug": "pages-misc-error",
-          "target": "_blank"
+          "url": "pages/faq",
+          "name": "FAQ",
+          "slug": "pages-faq"
         },
         {
-          "url": "pages/misc-under-maintenance",
-          "name": "Under Maintenance",
-          "slug": "pages-misc-under-maintenance",
-          "target": "_blank"
+          "url": "pages/help-center",
+          "name": "Help Center",
+          "slug": "pages-help-center"
+        },
+        {
+          "url": "pages/maintenance",
+          "name": "Maintenance",
+          "slug": "pages-maintenance"
         }
       ]
     },
     {
-      "menuHeader": "Components"
-    },
-    {
-      "name": "Cards",
-      "icon": "menu-icon tf-icons bx bx-collection",
-      "slug": "components-cards"
-    },
-    {
-      "name": "Forms",
-      "icon": "menu-icon tf-icons bx bx-notepad",
-      "slug": "components-forms"
-    },
-    {
-      "name": "Modals",
-      "icon": "menu-icon tf-icons bx bx-window",
-      "slug": "components-modals"
-    },
-    {
-      "name": "Tables",
-      "icon": "menu-icon tf-icons bx bx-table",
-      "slug": "components-tables"
-    },
-    {
-      "name": "User Interface",
-      "icon": "menu-icon tf-icons bx bx-cog",
-      "slug": "components-ui"
-    },
-    {
-      "menuHeader": "Documentation"
-    },
-    {
-      "url": "https://themeselection.com/docs/sneat-bootstrap-html-laravel-admin-template/documentation/introduction/",
       "name": "Documentation",
-      "icon": "menu-icon tf-icons bx bx-file",
+      "url": "https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/documentation/",
       "slug": "documentation",
+      "target": "_blank"
+    },
+    {
+      "name": "Changelog",
+      "url": "https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/changelog/",
+      "slug": "changelog",
       "target": "_blank"
     }
   ]
