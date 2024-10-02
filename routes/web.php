@@ -50,6 +50,7 @@ use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\SponsorshipController;
 
 use App\Http\Controllers\CollecteController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
 
 
@@ -142,6 +143,6 @@ Route::delete('/donatorslist/{id}', [DonatorController::class, 'destroy'])->name
 Route::resource('collectes', CollecteController::class);
 Route::resource('livraisons', LivraisonController::class);
 
-
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 //
 
