@@ -2,7 +2,7 @@
 
 @section('title', 'Ajouter un nouveau bénéficiaire')
 
-@section('content')
+@section('layoutContent')
 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Ajouter un nouveau bénéficiaire</h4>
 
 <div class="row">

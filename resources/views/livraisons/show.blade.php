@@ -25,12 +25,6 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="{{ route('livraisons.edit', $livraison->id) }}" class="btn btn-warning">Modifier</a>
-                <form action="{{ route('livraisons.destroy', $livraison->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                </form>
                 <a href="{{ route('livraisons.index') }}" class="btn btn-secondary">Retour à la liste des Livraisons</a>
             </div>
         </div>
