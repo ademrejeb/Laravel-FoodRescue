@@ -45,7 +45,7 @@ class DonatorController extends Controller
         $donator->save();
 
         
-      //  return redirect()->route('donators.create')->with('success', 'Donor added successfully!');
+        return redirect()->route('donators.index')->with('success', 'Donor added successfully!');
     }
     
 
@@ -78,6 +78,9 @@ class DonatorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $donator = Donator::findOrFail($id); // Find the Donator by ID
+        $donator->delete(); // Delete the Donator
+    
+        return redirect()->route('donators.index')->with('success', 'Donor successfully erased.');
     }
 }

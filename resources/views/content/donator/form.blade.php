@@ -1,8 +1,9 @@
-@extends('layouts/contentNavbarLayout')
 
-@section('title', ' Horizontal Layouts - Forms')
+@extends('layouts.commonMaster')
 
-@section('content')
+@section('layoutContent')
+
+
 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Adding a new donor</h4>
 
 <!-- Basic Layout & Basic with Icons -->
