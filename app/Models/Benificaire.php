@@ -18,4 +18,8 @@ class Benificaire extends Model
         'email',
         'type',
     ];
+    public function demandes()
+    {
+        return $this->hasMany(Demande::class);
+    }
 }
