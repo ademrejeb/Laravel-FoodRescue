@@ -51,6 +51,8 @@ use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\SponsorshipController;
 
 use App\Http\Controllers\CollecteController;
+use App\Http\Controllers\DemandeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -143,6 +145,7 @@ Route::delete('/donatorslist/{id}', [DonatorController::class, 'destroy'])->name
 Route::resource('collectes', CollecteController::class);
 Route::resource('livraisons', LivraisonController::class);
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::prefix('categories')->group(function () {
     Route::get('/', [CategoryController::class, 'index'])->name('categories.index'); 
     Route::get('/create', [CategoryController::class, 'create'])->name('categories.create'); 
@@ -167,5 +170,12 @@ Route::post('/set-locale', function (Request $request) {
 })->name('setLocale');
 
 
+Route::get('demandes', [DemandeController::class, 'index'])->name('demandes.index'); // Liste des demandes
+Route::get('demandes/create', [DemandeController::class, 'create'])->name('demandes.create'); // Formulaire d'ajout
+Route::post('demandes', [DemandeController::class, 'store'])->name('demandes.store'); // Enregistrer une demande
+Route::get('demandes/{demande}', [DemandeController::class, 'show'])->name('demandes.show'); // Détails d'une demande
+Route::get('demandes/{demande}/edit', [DemandeController::class, 'edit'])->name('demandes.edit'); // Formulaire de modification
+Route::put('demandes/{demande}', [DemandeController::class, 'update'])->name('demandes.update'); // Mettre à jour une demande
+Route::delete('demandes/{demande}', [DemandeController::class, 'destroy'])->name('demandes.destroy'); // Supprimer une demande
 //
 

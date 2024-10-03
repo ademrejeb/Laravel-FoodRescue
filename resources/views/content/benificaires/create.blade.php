@@ -20,8 +20,11 @@
             <div class="col-sm-10">
               <div class="input-group input-group-merge">
                 <span id="nom-icon" class="input-group-text"><i class="bx bx-user"></i></span>
-                <input type="text" name="nom" class="form-control" id="nom" placeholder="Nom du bénéficiaire" required />
+                <input type="text" name="nom" class="form-control @error('nom') is-invalid @enderror" id="nom" placeholder="Nom du bénéficiaire" required />
               </div>
+              @error('nom')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
           </div>
           <div class="row mb-3">
@@ -29,8 +32,11 @@
             <div class="col-sm-10">
               <div class="input-group input-group-merge">
                 <span class="input-group-text"><i class="bx bx-map"></i></span>
-                <input type="text" name="adresse" class="form-control" id="adresse" placeholder="Adresse" required />
+                <input type="text" name="adresse" class="form-control @error('adresse') is-invalid @enderror" id="adresse" placeholder="Adresse" required />
               </div>
+              @error('adresse')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
           </div>
           <div class="row mb-3">
@@ -38,8 +44,11 @@
             <div class="col-sm-10">
               <div class="input-group input-group-merge">
                 <span class="input-group-text"><i class="bx bx-phone"></i></span>
-                <input type="text" name="tel" class="form-control" id="tel" placeholder="Téléphone" required />
+                <input type="text" name="tel" class="form-control @error('tel') is-invalid @enderror" id="tel" placeholder="Téléphone" required />
               </div>
+              @error('tel')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
           </div>
           <div class="row mb-3">
@@ -47,17 +56,23 @@
             <div class="col-sm-10">
               <div class="input-group input-group-merge">
                 <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                <input type="email" name="email" class="form-control" id="email" placeholder="Email" required />
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email" required />
               </div>
+              @error('email')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
           </div>
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="type">Type</label>
             <div class="col-sm-10">
-              <select name="type" class="form-control" id="type" required>
+              <select name="type" class="form-control @error('type') is-invalid @enderror" id="type" required>
                 <option value="Association">Association</option>
                 <option value="Organisation caritative">Organisation caritative</option>
               </select>
+              @error('type')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
           </div>
           <div class="row justify-content-end">

@@ -99,7 +99,13 @@
           "url": "/benificaires",
           "name": "Benificaires",
           "slug": "benif"
+        },
+        {
+          "url": "/demandes",
+          "name": "Demandes",
+          "slug": "dem"
         }
+
       ]
     },
     {
