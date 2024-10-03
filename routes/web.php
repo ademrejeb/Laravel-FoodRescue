@@ -17,6 +17,7 @@ use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\authentications\ForgotPasswordBasic;
 use App\Http\Controllers\BenificaireController;
 use App\Http\Controllers\cards\CardBasic;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\user_interface\Accordion;
 use App\Http\Controllers\user_interface\Alerts;
 use App\Http\Controllers\user_interface\Badges;
@@ -53,8 +54,7 @@ use App\Http\Controllers\CollecteController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
-
-
+use App\Http\Controllers\ProductController;
 
 // Main Page Route
 Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
@@ -145,6 +145,25 @@ Route::resource('collectes', CollecteController::class);
 Route::resource('livraisons', LivraisonController::class);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::prefix('categories')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('categories.index'); 
+    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create'); 
+    Route::post('/', [CategoryController::class, 'store'])->name('categories.store'); 
+    Route::get('/{id}', [CategoryController::class, 'show'])->name('categories.show'); 
+    Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit'); 
+    Route::put('/{id}', [CategoryController::class, 'update'])->name('categories.update'); 
+    Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+});
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('products.index'); 
+    Route::get('/create', [ProductController::class, 'create'])->name('products.create'); 
+    Route::post('/', [ProductController::class, 'store'])->name('products.store'); 
+    Route::get('/{id}', [ProductController::class, 'show'])->name('products.show'); 
+    Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('products.edit'); 
+    Route::put('/{id}', [ProductController::class, 'update'])->name('products.update'); 
+    Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy'); 
+});
+
 
 Route::get('demandes', [DemandeController::class, 'index'])->name('demandes.index'); // Liste des demandes
 Route::get('demandes/create', [DemandeController::class, 'create'])->name('demandes.create'); // Formulaire d'ajout
