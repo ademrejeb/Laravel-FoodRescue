@@ -53,6 +53,7 @@ use App\Http\Controllers\SponsorshipController;
 use App\Http\Controllers\CollecteController;
 use App\Http\Controllers\LivraisonController;
 use App\Http\Controllers\ProductController;
+use Illuminate\Http\Request;
 
 // Main Page Route
 Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
@@ -160,6 +161,10 @@ Route::prefix('products')->group(function () {
     Route::put('/{id}', [ProductController::class, 'update'])->name('products.update'); 
     Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy'); 
 });
+Route::post('/set-locale', function (Request $request) {
+    $request->session()->put('locale', $request->locale);
+    return redirect()->back();
+})->name('setLocale');
 
 
 //
