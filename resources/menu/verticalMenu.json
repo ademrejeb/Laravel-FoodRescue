@@ -180,6 +180,23 @@
           "slug": "pages-maintenance"
         }
       ]
+    },
+    {
+      "name": "Stock",
+      "icon": "menu-icon tf-icons bx bx-cube-alt",
+      "slug": "stock",
+      "submenu": [
+        {
+          "url": "categories",
+          "name": "Categories",
+          "slug": "categories"
+        },
+        {
+          "url": "products",
+          "name": "Products",
+          "slug": "products"
+        }
+      ]
     }
   ]
 }
