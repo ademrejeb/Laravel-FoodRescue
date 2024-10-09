@@ -46,7 +46,8 @@ use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 use App\Http\Controllers\DonatorController;
-
+use App\Http\Controllers\TransporteurController;
+use App\Http\Controllers\VehiculeController;
 use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\SponsorshipController;
 
@@ -179,3 +180,6 @@ Route::put('demandes/{demande}', [DemandeController::class, 'update'])->name('de
 Route::delete('demandes/{demande}', [DemandeController::class, 'destroy'])->name('demandes.destroy'); // Supprimer une demande
 //
 
+
+Route::resource('transporteurs', TransporteurController::class);
+Route::resource('vehicules', VehiculeController::class);

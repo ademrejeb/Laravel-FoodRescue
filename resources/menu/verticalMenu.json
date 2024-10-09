@@ -203,6 +203,23 @@
           "slug": "products"
         }
       ]
+    },
+    {
+      "name": "transport",
+      "icon": "menu-icon tf-icons bx bx-cube-alt",
+      "slug": "Tronsport",
+      "submenu": [
+        {
+          "url": "transporteurs",
+          "name": "transporteurs",
+          "slug": "transporteurs"
+        },
+        {
+          "url": "vehicules",
+          "name": "vehicules",
+          "slug": "vehicules"
+        }
+      ]
     }
   ]
 }
