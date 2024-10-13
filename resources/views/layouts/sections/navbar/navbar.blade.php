@@ -41,6 +41,16 @@ $navbarDetached = ($navbarDetached ?? '');
           </div>
         </div>
         <!-- /Search -->
+        <div class="nav-item me-3">
+          <form action="{{ route('setLocale') }}" method="POST">
+            @csrf
+            <select name="locale" class="form-select" onchange="this.form.submit()">
+              <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English</option>
+              <option value="fr" {{ app()->getLocale() == 'fr' ? 'selected' : '' }}>Français</option>
+              <!-- Add more languages as needed -->
+            </select>
+          </form>
+        </div>
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
           <!-- Place this tag where you want the button to render. -->

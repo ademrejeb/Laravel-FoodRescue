@@ -15,7 +15,9 @@ use App\Http\Controllers\pages\MiscUnderMaintenance;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\authentications\ForgotPasswordBasic;
+use App\Http\Controllers\BenificaireController;
 use App\Http\Controllers\cards\CardBasic;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\user_interface\Accordion;
 use App\Http\Controllers\user_interface\Alerts;
 use App\Http\Controllers\user_interface\Badges;
@@ -44,14 +46,17 @@ use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 use App\Http\Controllers\DonatorController;
-
+use App\Http\Controllers\TransporteurController;
+use App\Http\Controllers\VehiculeController;
 use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\SponsorshipController;
 
 use App\Http\Controllers\CollecteController;
+use App\Http\Controllers\DemandeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
-
-
+use App\Http\Controllers\ProductController;
+use Illuminate\Http\Request;
 
 // Main Page Route
 Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
@@ -121,6 +126,16 @@ Route::get('/donatorform', [DonatorController::class, 'create'])->name('donators
 Route::post('/donatorsform', [DonatorController::class, 'store'])->name('donators.store');
 Route::get('/donatorslist', [DonatorController::class, 'index'])->name('donators.index');
 Route::put('/donatorslist', [DonatorController::class, 'edit'])->name('donators.edit');
+Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('donators.destroy');
+
+
+Route::get('/benificaires', [BenificaireController::class, 'index'])->name('benificaires.index');
+Route::get('/benificaires/create', [BenificaireController::class, 'create'])->name('benificaires.create'); 
+Route::post('/benificaires', [BenificaireController::class, 'store'])->name('benificaires.store'); 
+Route::get('/benificaires/{id}', [BenificaireController::class, 'show'])->name('benificaires.show');
+Route::get('/benificaires/{id}/edit', [BenificaireController::class, 'edit'])->name('benificaires.edit');
+Route::put('/benificaires/{id}', [BenificaireController::class, 'update'])->name('benificaires.update'); 
+Route::delete('/benificaires/{id}', [BenificaireController::class, 'destroy'])->name('benificaires.destroy'); 
 
 Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('donators.destroy');
 Route::resource('partenaires', PartenaireController::class);
@@ -131,6 +146,40 @@ Route::delete('/donatorslist/{id}', [DonatorController::class, 'destroy'])->name
 Route::resource('collectes', CollecteController::class);
 Route::resource('livraisons', LivraisonController::class);
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::prefix('categories')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('categories.index'); 
+    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create'); 
+    Route::post('/', [CategoryController::class, 'store'])->name('categories.store'); 
+    Route::get('/{id}', [CategoryController::class, 'show'])->name('categories.show'); 
+    Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit'); 
+    Route::put('/{id}', [CategoryController::class, 'update'])->name('categories.update'); 
+    Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+});
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('products.index'); 
+    Route::get('/create', [ProductController::class, 'create'])->name('products.create'); 
+    Route::post('/', [ProductController::class, 'store'])->name('products.store'); 
+    Route::get('/{id}', [ProductController::class, 'show'])->name('products.show'); 
+    Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('products.edit'); 
+    Route::put('/{id}', [ProductController::class, 'update'])->name('products.update'); 
+    Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy'); 
+});
+Route::post('/set-locale', function (Request $request) {
+    $request->session()->put('locale', $request->locale);
+    return redirect()->back();
+})->name('setLocale');
 
+
+Route::get('demandes', [DemandeController::class, 'index'])->name('demandes.index'); // Liste des demandes
+Route::get('demandes/create', [DemandeController::class, 'create'])->name('demandes.create'); // Formulaire d'ajout
+Route::post('demandes', [DemandeController::class, 'store'])->name('demandes.store'); // Enregistrer une demande
+Route::get('demandes/{demande}', [DemandeController::class, 'show'])->name('demandes.show'); // Détails d'une demande
+Route::get('demandes/{demande}/edit', [DemandeController::class, 'edit'])->name('demandes.edit'); // Formulaire de modification
+Route::put('demandes/{demande}', [DemandeController::class, 'update'])->name('demandes.update'); // Mettre à jour une demande
+Route::delete('demandes/{demande}', [DemandeController::class, 'destroy'])->name('demandes.destroy'); // Supprimer une demande
 //
 
+
+Route::resource('transporteurs', TransporteurController::class);
+Route::resource('vehicules', VehiculeController::class);
