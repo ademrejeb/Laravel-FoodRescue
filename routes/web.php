@@ -52,14 +52,17 @@ use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\SponsorshipController;
 
 use App\Http\Controllers\CollecteController;
+use App\Http\Controllers\ContratController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
 use App\Http\Controllers\ProductController;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 
 // Main Page Route
 Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+Route::get('sponsorships/statistiques', [SponsorshipController::class, 'statistiques'])->name('sponsorships.statistiques');
 
 // layout
 Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');
@@ -118,6 +121,8 @@ Route::get('/forms/input-groups', [InputGroups::class, 'index'])->name('forms-in
 // form layouts
 Route::get('/form/layouts-vertical', [VerticalForm::class, 'index'])->name('form-layouts-vertical');
 Route::get('/form/layouts-horizontal', [HorizontalForm::class, 'index'])->name('form-layouts-horizontal');
+//////
+// Route::get('/analyse-par-periode', [SponsorshipController::class, 'analyseParPeriode'])->name('analyse.par.periode');
 
 // tables
 Route::get('/tables/basic', [TablesBasic::class, 'index'])->name('tables-basic');
@@ -181,5 +186,20 @@ Route::delete('demandes/{demande}', [DemandeController::class, 'destroy'])->name
 //
 
 
+// web.php
+Route::get('/sponsorships/{id}/contract', [SponsorshipController::class, 'contract'])->name('sponsorships.contract');
+Route::post('/sponsorships/{id}/sign', [SponsorshipController::class, 'show'])->name('sponsorships.signContrat');
+Route::get('/sponsorships/{id}/contrat', [SponsorshipController::class, 'showContrat'])->name('sponsorships.showContrat');
+
+
+// Route::resource('contrats', ContratController::class);
 Route::resource('transporteurs', TransporteurController::class);
 Route::resource('vehicules', VehiculeController::class);
+Route::get('/test-pdf', function () {
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml('<h1>Hello World</h1>');
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+    return $dompdf->stream('test.pdf');
+});
+Route::get('/sponsorships/{id}/download', [SponsorshipController::class, 'download'])->name('sponsorships.download');

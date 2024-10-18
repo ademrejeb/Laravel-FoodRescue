@@ -62,6 +62,7 @@
                 @enderror
             </div>
             <button type="submit" class="btn btn-primary">Mettre à Jour</button>
+            <a href="{{ route('sponsorships.index') }}" class="btn btn-secondary">Annuler</a> <!-- Bouton Annuler -->
         </form>
     </div>
 </div>

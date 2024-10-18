@@ -21,4 +21,8 @@ class Partenaire extends Model
     {
         return $this->hasMany(Sponsorship::class);
     }
+    public function contributions()
+    {
+        return $this->hasMany(Contribution::class);
+    }
 }
