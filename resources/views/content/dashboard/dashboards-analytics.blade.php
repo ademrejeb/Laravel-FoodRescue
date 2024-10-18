@@ -4,6 +4,7 @@
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/apex-charts/apex-charts.css')}}">
+
 @endsection
 
 @section('vendor-script')
@@ -12,6 +13,7 @@
 
 @section('page-script')
 <script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
+
 @endsection
 
 @section('layoutContent')

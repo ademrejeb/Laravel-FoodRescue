@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationEvent;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
@@ -29,6 +30,9 @@ class ProductController extends Controller
       
         $validated['image'] = $this->uploadImage($request);
         Product::create($validated);
+        $name=$request->name;
+        event(new NotificationEvent($name));
+        
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
 
