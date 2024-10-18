@@ -18,7 +18,7 @@
         <div class="col-sm-10">
           <div class="input-group input-group-merge">
             <span class="input-group-text"><i class="bx bx-user"></i></span>
-            <input type="text" name="nom" class="form-control" id="basic-icon-default-name" placeholder="Nom du partenaire" value="{{ old('nom') }}" required />
+            <input type="text" name="nom" class="form-control" id="basic-icon-default-name" placeholder="Nom du partenaire" value="{{ old('nom') }}" required minlength="2" />
             @error('nom')
               <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -43,7 +43,7 @@
         <div class="col-sm-10">
           <div class="input-group input-group-merge">
             <span class="input-group-text"><i class="bx bx-phone"></i></span>
-            <input type="text" name="contact" class="form-control" id="basic-icon-default-contact" placeholder="Contact du partenaire" value="{{ old('contact') }}" required />
+            <input type="tel" name="contact" class="form-control" id="basic-icon-default-contact" placeholder="Contact du partenaire" value="{{ old('contact') }}" required pattern="[+][0-9]{1,3}[0-9]{4,14}(?:x.+)?"/>
             @error('contact')
               <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -65,10 +65,24 @@
       <div class="row justify-content-end">
         <div class="col-sm-10 m-2">
           <button type="submit" class="btn btn-primary">Créer</button>
+          <a href="{{ route('partenaires.index') }}" class="btn btn-secondary">Annuler</a>
         </div>
       </div>
     </form>
   </div>
 </div>
 <!--/ Partner Form -->
+@endsection  
+
+@section('scripts')
+<!-- intl-tel-input JavaScript and CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script>
+  const contactInput = document.querySelector("#basic-icon-default-contact");
+  const iti = window.intlTelInput(contactInput, {
+    initialCountry: "auto",
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+  });
+</script>
 @endsection

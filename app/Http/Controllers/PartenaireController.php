@@ -36,8 +36,21 @@ class PartenaireController extends Controller
     }
 
     // Afficher un partenaire spécifique
-    public function show(Partenaire $partenaire)
+    // public function show(Partenaire $partenaire)
+    // {
+    //     return view('partenaires.show', compact('partenaire'));
+    // }
+    public function show($id)
     {
+        // Récupérer le partenaire avec ses sponsors associés
+        $partenaire = Partenaire::with('sponsorships')->find($id);
+
+        // Vérifier si le partenaire existe
+        if (!$partenaire) {
+            return redirect()->route('partenaires.index')->with('error', 'Partenaire non trouvé');
+        }
+
+        // Afficher la vue avec les détails du partenaire
         return view('partenaires.show', compact('partenaire'));
     }
 
@@ -52,10 +65,13 @@ class PartenaireController extends Controller
     {
         $request->validate([
             'nom' => 'required|string|max:255',
-            'type' => 'required|string|in:entreprise,organisation',
-            'contact' => 'required|string|max:255',
+            'type' => 'required|in:entreprise,organisation',
+            'contact' => 'required|regex:/^\+\d+$/|max:255', 
             'secteur_activite' => 'required|string|max:255',
+        ], [
+            'contact.regex' => 'Le numéro de contact doit commencer par un "+" suivi de chiffres uniquement.',
         ]);
+    
 
         $partenaire->update($request->all());
 
@@ -68,4 +84,5 @@ class PartenaireController extends Controller
         $partenaire->delete();
         return redirect()->route('partenaires.index')->with('success', 'Partenaire supprimé avec succès.');
     }
+    
 }

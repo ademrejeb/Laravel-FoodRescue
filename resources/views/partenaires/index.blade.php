@@ -1,6 +1,6 @@
 @extends('layouts.commonMaster')
 
-@section('title', 'Tables - Partenaires List')
+@section('title', 'Adding a new partner')
 
 @section('layoutContent')
 <h4 class="py-3 mb-4">

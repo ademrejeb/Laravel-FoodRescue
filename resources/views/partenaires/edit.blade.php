@@ -16,6 +16,7 @@
         <form action="{{ route('partenaires.update', $partenaire->id) }}" method="POST">
             @csrf
             @method('PUT')
+
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
                 <input type="text" name="nom" class="form-control" id="nom" value="{{ old('nom', $partenaire->nom) }}" required>
@@ -23,6 +24,7 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
             <div class="mb-3">
                 <label for="type" class="form-label">Type</label>
                 <select name="type" id="type" class="form-control" required>
@@ -34,6 +36,7 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
             <div class="mb-3">
                 <label for="contact" class="form-label">Contact</label>
                 <input type="text" name="contact" class="form-control" id="contact" value="{{ old('contact', $partenaire->contact) }}" required>
@@ -41,6 +44,7 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
             <div class="mb-3">
                 <label for="secteur_activite" class="form-label">Secteur d'Activité</label>
                 <input type="text" name="secteur_activite" class="form-control" id="secteur_activite" value="{{ old('secteur_activite', $partenaire->secteur_activite) }}" required>
@@ -48,7 +52,9 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
             <button type="submit" class="btn btn-primary">Mettre à Jour</button>
+            <a href="{{ route('partenaires.index') }}" class="btn btn-secondary">Annuler</a> <!-- Bouton Annuler -->
         </form>
     </div>
 </div>

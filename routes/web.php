@@ -54,11 +54,13 @@ use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\SponsorshipController;
 
 use App\Http\Controllers\CollecteController;
+use App\Http\Controllers\ContratController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 
 /*
@@ -132,6 +134,8 @@ Route::get('/forms/input-groups', [InputGroups::class, 'index'])->name('forms-in
 // form layouts
 Route::get('/form/layouts-vertical', [VerticalForm::class, 'index'])->name('form-layouts-vertical');
 Route::get('/form/layouts-horizontal', [HorizontalForm::class, 'index'])->name('form-layouts-horizontal');
+//////
+// Route::get('/analyse-par-periode', [SponsorshipController::class, 'analyseParPeriode'])->name('analyse.par.periode');
 
 // tables
 Route::get('/tables/basic', [TablesBasic::class, 'index'])->name('tables-basic');
@@ -144,12 +148,12 @@ Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('don
 
 
 Route::get('/benificaires', [BenificaireController::class, 'index'])->name('benificaires.index');
-Route::get('/benificaires/create', [BenificaireController::class, 'create'])->name('benificaires.create'); 
-Route::post('/benificaires', [BenificaireController::class, 'store'])->name('benificaires.store'); 
+Route::get('/benificaires/create', [BenificaireController::class, 'create'])->name('benificaires.create');
+Route::post('/benificaires', [BenificaireController::class, 'store'])->name('benificaires.store');
 Route::get('/benificaires/{id}', [BenificaireController::class, 'show'])->name('benificaires.show');
 Route::get('/benificaires/{id}/edit', [BenificaireController::class, 'edit'])->name('benificaires.edit');
-Route::put('/benificaires/{id}', [BenificaireController::class, 'update'])->name('benificaires.update'); 
-Route::delete('/benificaires/{id}', [BenificaireController::class, 'destroy'])->name('benificaires.destroy'); 
+Route::put('/benificaires/{id}', [BenificaireController::class, 'update'])->name('benificaires.update');
+Route::delete('/benificaires/{id}', [BenificaireController::class, 'destroy'])->name('benificaires.destroy');
 
 Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('donators.destroy');
 Route::resource('partenaires', PartenaireController::class);
@@ -162,22 +166,22 @@ Route::resource('livraisons', LivraisonController::class);
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified','role:client'])->name('home');
 Route::prefix('categories')->group(function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('categories.index'); 
-    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create'); 
-    Route::post('/', [CategoryController::class, 'store'])->name('categories.store'); 
-    Route::get('/{id}', [CategoryController::class, 'show'])->name('categories.show'); 
-    Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit'); 
-    Route::put('/{id}', [CategoryController::class, 'update'])->name('categories.update'); 
+    Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/{id}', [CategoryController::class, 'show'])->name('categories.show');
+    Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 Route::prefix('products')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('products.index'); 
-    Route::get('/create', [ProductController::class, 'create'])->name('products.create'); 
-    Route::post('/', [ProductController::class, 'store'])->name('products.store'); 
-    Route::get('/{id}', [ProductController::class, 'show'])->name('products.show'); 
-    Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('products.edit'); 
-    Route::put('/{id}', [ProductController::class, 'update'])->name('products.update'); 
-    Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy'); 
+    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
 Route::post('/set-locale', function (Request $request) {
     $request->session()->put('locale', $request->locale);
@@ -195,6 +199,13 @@ Route::delete('demandes/{demande}', [DemandeController::class, 'destroy'])->name
 //
 
 
+// web.php
+Route::get('/sponsorships/{id}/contract', [SponsorshipController::class, 'contract'])->name('sponsorships.contract');
+Route::post('/sponsorships/{id}/sign', [SponsorshipController::class, 'show'])->name('sponsorships.signContrat');
+Route::get('/sponsorships/{id}/contrat', [SponsorshipController::class, 'showContrat'])->name('sponsorships.showContrat');
+
+
+// Route::resource('contrats', ContratController::class);
 Route::resource('transporteurs', TransporteurController::class);
 Route::resource('vehicules', VehiculeController::class);
 
