@@ -30,9 +30,9 @@ class SponsorshipController extends Controller
         $request->validate([
             'partenaire_id' => 'required|exists:partenaires,id',
             'type_soutien' => 'required|string|in:financier,matériel,service',
-            'montant' => 'nullable|numeric',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date|after_or_equal:date_debut',
+            'montant' => 'nullable|numeric|min:50',
+            'date_debut' => 'required|date|after_or_equal:2015-01-01|before_or_equal:2030-12-31',
+            'date_fin' => 'required|date|after_or_equal:2015-01-01|before_or_equal:2030-12-31|after_or_equal:date_debut',
         ]);
     
         // Créer le sponsorship
@@ -69,9 +69,9 @@ class SponsorshipController extends Controller
         $request->validate([
             'partenaire_id' => 'required|exists:partenaires,id',
             'type_soutien' => 'required|string|in:financier,matériel,service',
-            'montant' => 'nullable|numeric',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date|after_or_equal:date_debut',
+            'montant' => 'nullable|numeric|min:50',
+            'date_debut' => 'required|date|after_or_equal:2015-01-01|before_or_equal:2030-12-31',
+            'date_fin' => 'required|date|after_or_equal:2015-01-01|before_or_equal:2030-12-31|after_or_equal:date_debut',
         ]);
 
         $sponsorship->update($request->all());
