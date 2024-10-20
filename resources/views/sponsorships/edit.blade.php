@@ -48,19 +48,21 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="date_debut" class="form-label">Date de Début</label>
-                <input type="date" name="date_debut" class="form-control" id="date_debut" value="{{ old('date_debut', $sponsorship->date_debut) }}" required>
-                @error('date_debut')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="date_fin" class="form-label">Date de Fin</label>
-                <input type="date" name="date_fin" class="form-control" id="date_fin" value="{{ old('date_fin', $sponsorship->date_fin) }}" required>
-                @error('date_fin')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+    <label for="date_debut" class="form-label">Date de Début</label>
+    <input type="date" name="date_debut" class="form-control" id="date_debut" value="{{ old('date_debut', $sponsorship->date_debut) }}" required min="2015-01-01" max="2030-12-31">
+    @error('date_debut')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="mb-3">
+    <label for="date_fin" class="form-label">Date de Fin</label>
+    <input type="date" name="date_fin" class="form-control" id="date_fin" value="{{ old('date_fin', $sponsorship->date_fin) }}" required min="2015-01-01" max="2030-12-31">
+    @error('date_fin')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
             <button type="submit" class="btn btn-primary">Mettre à Jour</button>
             <a href="{{ route('sponsorships.index') }}" class="btn btn-secondary">Annuler</a> <!-- Bouton Annuler -->
         </form>
