@@ -37,9 +37,27 @@
         <li class="nav-item"><a href="how-it-works.html" class="nav-link">Comment ça marche</a></li>
         <li class="nav-item"><a href="donate.html" class="nav-link">Proposer une Offre</a></li>
         <li class="nav-item"><a href="actions.html" class="nav-link">Nos Actions</a></li>
-        <li class="nav-item"><a href="recommendations.html" class="nav-link">Anti-Gaspillage</a></li>
+        
         <li class="nav-item"><a href="about.html" class="nav-link">À propos</a></li>
         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+       
+          @auth
+             
+              <li class="nav-item">
+                  <a href="{{ route('logout') }}" 
+                     class="nav-link"
+                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      Logout
+                  </a>
+              </li>
+      
+            
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+              </form>
+         
+          @endauth
+      
       </ul>
     </div>
   </div>
