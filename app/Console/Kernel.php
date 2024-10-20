@@ -12,6 +12,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('rapports:generate daily')->daily();
+        $schedule->command('rapports:generate weekly')->weekly();
+        $schedule->command('rapports:generate monthly')->monthly();
         // $schedule->command('inspire')->hourly();
     }
 

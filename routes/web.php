@@ -57,6 +57,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
 
 // Main Page Route
 Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
@@ -145,6 +146,9 @@ Route::delete('/donatorslist/{id}', [DonatorController::class, 'destroy'])->name
 
 Route::resource('collectes', CollecteController::class);
 Route::resource('livraisons', LivraisonController::class);
+Route::get('livraisons/export/pdf', [LivraisonController::class, 'exportPDF'])->name('livraisons.export.pdf');
+Route::get('livraisons/export/csv', [LivraisonController::class, 'exportCSV'])->name('livraisons.export.csv');
+
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::prefix('categories')->group(function () {

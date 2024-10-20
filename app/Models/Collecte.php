@@ -9,10 +9,15 @@ class Collecte extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['date_collecte', 'statut'];
+    protected $fillable = ['date_collecte', 'statut','quantite_collecte', 'donateur_id'];
 
     public function livraisons()
     {
         return $this->hasMany(Livraison::class);
+    }
+ 
+    public function donateur()
+    {
+        return $this->belongsTo(Donator::class, 'donateur_id');
     }
 }
