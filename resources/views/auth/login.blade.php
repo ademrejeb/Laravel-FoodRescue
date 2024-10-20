@@ -52,6 +52,7 @@
 @section('page-style')
 <!-- Page-specific CSS -->
 <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}">
+{!! NoCaptcha::renderJs() !!}
 @endsection
 
 @section('content')
@@ -111,6 +112,14 @@
                                 <input class="form-check-input" type="checkbox" id="remember-me" name="remember">
                                 <label class="form-check-label" for="remember-me">Remember Me</label>
                             </div>
+                        </div>
+                        <div class="mb-3">
+                        {!! NoCaptcha::display(['data-theme' => 'dark']) !!}
+                        @if ($errors->has('g-recaptcha-response'))
+    <span class="help-block">
+        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+    </span>
+@endif
                         </div>
 
                         <!-- Submit Button -->
