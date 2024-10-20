@@ -220,6 +220,24 @@
           "slug": "vehicules"
         }
       ]
+    },
+    {
+      "name": " Campagnes et Contributions",
+      "icon": "menu-icon tf-icons bx bx-package",
+      "slug": "campagnes-contributions",
+      "submenu": [
+        {
+          "url": "/campagnes",
+          "name": "Campagnes",
+          "slug": "camp"
+        },
+        {
+          "url": "/contributions",
+          "name": "Contributions",
+          "slug": "contr"
+        }
+
+      ]
     }
   ]
 }

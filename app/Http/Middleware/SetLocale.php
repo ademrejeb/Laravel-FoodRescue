@@ -18,8 +18,9 @@ class SetLocale
     {
         $locale = $request->session()->get('locale', config('app.locale'));
 
-        
+        \Log::info('Locale set to: ' . $locale); // Ajouter ce log
         App::setLocale($locale);
+
 
         return $next($request);
     }

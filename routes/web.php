@@ -57,6 +57,9 @@ use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CampagneController;
+use App\Http\Controllers\ContributionController;
+
 use Illuminate\Http\Request;
 
 /*
@@ -195,6 +198,9 @@ Route::delete('demandes/{demande}', [DemandeController::class, 'destroy'])->name
 
 Route::resource('transporteurs', TransporteurController::class);
 Route::resource('vehicules', VehiculeController::class);
+
+Route::resource('campagnes', CampagneController::class);
+Route::resource('contributions', ContributionController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
