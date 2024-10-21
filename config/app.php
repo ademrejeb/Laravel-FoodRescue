@@ -169,7 +169,10 @@ return [
     App\Providers\EventServiceProvider::class,
     App\Providers\RouteServiceProvider::class,
     App\Providers\MenuServiceProvider::class,
+
     Barryvdh\DomPDF\ServiceProvider::class,
+
+    Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
   ])->toArray(),
 
   /*
@@ -186,6 +189,7 @@ return [
   'aliases' => Facade::defaultAliases()->merge([
     'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
     // 'Example' => App\Facades\Example::class,
+    'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
   ])->toArray(),
 
 ];
