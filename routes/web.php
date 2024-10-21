@@ -18,6 +18,7 @@ use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\authentications\ForgotPasswordBasic;
 use App\Http\Controllers\BenificaireController;
 use App\Http\Controllers\cards\CardBasic;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\user_interface\Accordion;
 use App\Http\Controllers\user_interface\Alerts;
@@ -56,6 +57,7 @@ use App\Http\Controllers\CollecteController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 
@@ -205,5 +207,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::middleware(['auth', 'verified', 'role:client'])->group(function () {
+    Route::get('/panier', [CartController::class, 'show'])->name('panier');
+    Route::post('/panier/add/{product}', [CartController::class, 'add'])->name('panier.add');
+    Route::delete('/panier/remove/{id}', [CartController::class, 'remove'])->name('panier.remove');
+});
+Route::get('/payment', [PaymentController::class, 'create'])->name('payment.create');
+Route::post('/payment/charge', [PaymentController::class, 'charge'])->name('payment.charge');
+
 
 require __DIR__.'/auth.php';
