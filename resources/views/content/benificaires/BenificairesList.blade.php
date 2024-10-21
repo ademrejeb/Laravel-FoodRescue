@@ -39,7 +39,7 @@
 </td>
 
           <td>{{ $benif->nom }}</td>
-          <td>{{ $benif->addresse }}</td>
+          <td>{{ $benif->adresse }}</td>
           <td>{{ $benif->tel }}</td>
           <td>{{ $benif->email }}</td>
           <td>{{ $benif->type }}</td>
