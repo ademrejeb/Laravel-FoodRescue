@@ -3,6 +3,7 @@ $containerNav = $containerNav ?? 'container-fluid';
 $navbarDetached = ($navbarDetached ?? '');
 
 @endphp
+@if (Auth::check())
 
 <!-- Navbar -->
 @if(isset($navbarDetached) && $navbarDetached == 'navbar-detached')
@@ -74,10 +75,14 @@ $navbarDetached = ($navbarDetached ?? '');
                         <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle">
                       </div>
                     </div>
+                    @if (Auth::check())
                     <div class="flex-grow-1">
-                      <span class="fw-medium d-block">John Doe</span>
+                      <span class="fw-medium d-block">{{Auth::user()->name}}</span>
                       <small class="text-muted">Admin</small>
                     </div>
+   
+          @endif 
+
                   </div>
                 </a>
               </li>
@@ -109,11 +114,15 @@ $navbarDetached = ($navbarDetached ?? '');
                 <div class="dropdown-divider"></div>
               </li>
               <li>
-                <a class="dropdown-item" href="javascript:void(0);">
-                  <i class='bx bx-power-off me-2'></i>
-                  <span class="align-middle">Log Out</span>
-                </a>
-              </li>
+                <form method="POST" action="{{ route('logout') }}" id="logoutForm">
+                    @csrf
+                    <a class="dropdown-item" href="javascript:void(0);" 
+                       onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                        <i class='bx bx-power-off me-2'></i>
+                        <span class="align-middle">Log Out</span>
+                    </a>
+                </form>
+            </li>
             </ul>
           </li>
           <!--/ User -->
@@ -124,4 +133,5 @@ $navbarDetached = ($navbarDetached ?? '');
     </div>
     @endif
   </nav>
+  @endif
   <!-- / Navbar -->

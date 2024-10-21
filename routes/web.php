@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\Analytics;
 use App\Http\Controllers\layouts\WithoutMenu;
@@ -17,6 +18,7 @@ use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\authentications\ForgotPasswordBasic;
 use App\Http\Controllers\BenificaireController;
 use App\Http\Controllers\cards\CardBasic;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\user_interface\Accordion;
 use App\Http\Controllers\user_interface\Alerts;
@@ -56,13 +58,29 @@ use App\Http\Controllers\ContratController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 // Main Page Route
+
 Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
 Route::get('sponsorships/statistiques', [SponsorshipController::class, 'statistiques'])->name('sponsorships.statistiques');
+
+Route::get('/', [Analytics::class, 'index'])->middleware(['auth', 'verified','role:admin'])->name('dashboard-analytics');
+
+
 
 // layout
 Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');
@@ -135,12 +153,12 @@ Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('don
 
 
 Route::get('/benificaires', [BenificaireController::class, 'index'])->name('benificaires.index');
-Route::get('/benificaires/create', [BenificaireController::class, 'create'])->name('benificaires.create'); 
-Route::post('/benificaires', [BenificaireController::class, 'store'])->name('benificaires.store'); 
+Route::get('/benificaires/create', [BenificaireController::class, 'create'])->name('benificaires.create');
+Route::post('/benificaires', [BenificaireController::class, 'store'])->name('benificaires.store');
 Route::get('/benificaires/{id}', [BenificaireController::class, 'show'])->name('benificaires.show');
 Route::get('/benificaires/{id}/edit', [BenificaireController::class, 'edit'])->name('benificaires.edit');
-Route::put('/benificaires/{id}', [BenificaireController::class, 'update'])->name('benificaires.update'); 
-Route::delete('/benificaires/{id}', [BenificaireController::class, 'destroy'])->name('benificaires.destroy'); 
+Route::put('/benificaires/{id}', [BenificaireController::class, 'update'])->name('benificaires.update');
+Route::delete('/benificaires/{id}', [BenificaireController::class, 'destroy'])->name('benificaires.destroy');
 
 Route::delete('/donatorslist', [DonatorController::class, 'destroy'])->name('donators.destroy');
 Route::resource('partenaires', PartenaireController::class);
@@ -151,24 +169,24 @@ Route::delete('/donatorslist/{id}', [DonatorController::class, 'destroy'])->name
 Route::resource('collectes', CollecteController::class);
 Route::resource('livraisons', LivraisonController::class);
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified','role:client'])->name('home');
 Route::prefix('categories')->group(function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('categories.index'); 
-    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create'); 
-    Route::post('/', [CategoryController::class, 'store'])->name('categories.store'); 
-    Route::get('/{id}', [CategoryController::class, 'show'])->name('categories.show'); 
-    Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit'); 
-    Route::put('/{id}', [CategoryController::class, 'update'])->name('categories.update'); 
+    Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/{id}', [CategoryController::class, 'show'])->name('categories.show');
+    Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 Route::prefix('products')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('products.index'); 
-    Route::get('/create', [ProductController::class, 'create'])->name('products.create'); 
-    Route::post('/', [ProductController::class, 'store'])->name('products.store'); 
-    Route::get('/{id}', [ProductController::class, 'show'])->name('products.show'); 
-    Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('products.edit'); 
-    Route::put('/{id}', [ProductController::class, 'update'])->name('products.update'); 
-    Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy'); 
+    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
 Route::post('/set-locale', function (Request $request) {
     $request->session()->put('locale', $request->locale);
@@ -195,6 +213,7 @@ Route::get('/sponsorships/{id}/contrat', [SponsorshipController::class, 'showCon
 // Route::resource('contrats', ContratController::class);
 Route::resource('transporteurs', TransporteurController::class);
 Route::resource('vehicules', VehiculeController::class);
+
 Route::get('/test-pdf', function () {
     $dompdf = new Dompdf();
     $dompdf->loadHtml('<h1>Hello World</h1>');
@@ -203,3 +222,25 @@ Route::get('/test-pdf', function () {
     return $dompdf->stream('test.pdf');
 });
 Route::get('/sponsorships/{id}/download', [SponsorshipController::class, 'download'])->name('sponsorships.download');
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+Route::middleware(['auth', 'verified', 'role:client'])->group(function () {
+    Route::get('/panier', [CartController::class, 'show'])->name('panier');
+    Route::post('/panier/add/{product}', [CartController::class, 'add'])->name('panier.add');
+    Route::delete('/panier/remove/{id}', [CartController::class, 'remove'])->name('panier.remove');
+});
+Route::get('/payment', [PaymentController::class, 'create'])->name('payment.create');
+Route::post('/payment/charge', [PaymentController::class, 'charge'])->name('payment.charge');
+
+
+require __DIR__.'/auth.php';
+

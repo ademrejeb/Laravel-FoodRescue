@@ -1,3 +1,4 @@
+@if (Auth::check())
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
   <!-- ! Hide app brand if navbar-full -->
@@ -76,3 +77,4 @@
   </ul>
 
 </aside>
+@endif
