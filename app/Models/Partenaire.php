@@ -14,6 +14,8 @@ class Partenaire extends Model
         'type',
         'contact',
         'secteur_activite',
+        'logo',
+        'website_url',
     ];
 
     // Relation One-to-Many avec Sponsorship

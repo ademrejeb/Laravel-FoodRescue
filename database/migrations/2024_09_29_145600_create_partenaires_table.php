@@ -14,6 +14,8 @@ class CreatePartenairesTable extends Migration
             $table->string('type'); // entreprise, organisation
             $table->string('contact');
             $table->string('secteur_activite');
+            $table->string('logo')->nullable(); // pour stocker le chemin du logo
+            $table->string('site')->nullable();
             $table->timestamps();
         });
     }

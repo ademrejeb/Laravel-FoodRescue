@@ -4,16 +4,23 @@
 
 @section('layoutContent')
 <h4 class="py-3 mb-4">
-    <span class="text-muted fw-light">Détails /</span> Partenaire: {{ $partenaire->nom }}
+    <span class="text-muted fw-light">Détails /</span> Partenaire: <a href="{{ $partenaire->site }}" target="_blank">{{ $partenaire->nom }}</a>
 </h4>
 
 <!-- Partenaire Details Card -->
 <div class="card mb-4" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); animation: fadeIn 0.5s;">
-    <div class="card-header" style="background-color: #add8e6; color: white; padding: 15px; border-top-left-radius: 10px; border-top-right-radius: 10px;"> 
+    <div class="card-header" style="background-color: white; color: #333; padding: 15px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
         <div class="d-flex justify-content-between align-items-center">
-            <h5 class="mb-0" style="font-size: 1.2rem;">{{ $partenaire->nom }}</h5> 
-            <a href="{{ route('partenaires.index') }}" class="btn btn-secondary btn-sm"> 
-                <i class="tf-icons bx bx-arrow-back"></i> Retour 
+            <div class="d-flex align-items-center">
+                <a href="{{ $partenaire->site }}" target="_blank">
+                    <img src="{{ asset('storage/' . $partenaire->logo) }}" alt="{{ $partenaire->nom }} Logo" style="width: 100px; height: auto;"> <!-- Ajustez la largeur ici -->
+                </a>
+                <h5 class="mb-0 ms-2" style="font-size: 1.2rem;">
+                    <a href="{{ $partenaire->site }}" target="_blank">{{ $partenaire->nom }}</a>
+                </h5>
+            </div>
+            <a href="{{ route('partenaires.index') }}" class="btn btn-secondary btn-sm">
+                <i class="tf-icons bx bx-arrow-back"></i> Retour
             </a>
         </div>
     </div>
@@ -55,9 +62,6 @@
         @endif
     </div>
 </div>
-<!--/ Partenaire Details Card -->
-
-
 
 <style>
     @keyframes fadeIn {
