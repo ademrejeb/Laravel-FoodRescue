@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Benificaire;
+use App\Models\Partenaire;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -13,7 +14,7 @@ class HomeController extends Controller
     {
         $products = Product::where('stock_status', 'disponible')->get();
         $benificaires = Benificaire::latest()->take(5)->get();
-
+        $partenaires = Partenaire::orderBy('created_at', 'desc')->take(10)->get();
         // Créer une instance de Guzzle Client
         $client = new Client();
 
@@ -44,6 +45,7 @@ class HomeController extends Controller
             }
         }
 
-        return view('frontend.main', compact('products', 'benificaires'));
+        return view('frontend.main', compact('products', 'benificaires','partenaires'));
     }
+
 }

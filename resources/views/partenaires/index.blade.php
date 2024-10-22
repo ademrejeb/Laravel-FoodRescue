@@ -1,6 +1,6 @@
 @extends('layouts.commonMaster')
 
-@section('title', 'Adding a new partner')
+@section('title', 'Liste des Partenaires')
 
 @section('layoutContent')
 <h4 class="py-3 mb-4">
@@ -34,6 +34,7 @@
       <thead>
         <tr>
           <th>ID</th>
+          <th>Logo</th>
           <th>Nom</th>
           <th>Type</th>
           <th>Contact</th>
@@ -46,7 +47,20 @@
           @foreach($partenaires as $partenaire)
           <tr>
             <td>{{ $partenaire->id }}</td>
-            <td>{{ $partenaire->nom }}</td>
+            <td>
+              @if($partenaire->logo)
+                <img src="{{ asset('storage/' . $partenaire->logo) }}" alt="Logo" width="50" height="50">
+              @else
+                N/A
+              @endif
+            </td>
+            <td>
+              @if($partenaire->site)
+                <a href="{{ $partenaire->site }}" target="_blank">{{ $partenaire->nom }}</a>
+              @else
+                {{ $partenaire->nom }}
+              @endif
+            </td>
             <td>{{ $partenaire->type }}</td>
             <td>{{ $partenaire->contact }}</td>
             <td>{{ $partenaire->secteur_activite }}</td>
@@ -73,7 +87,7 @@
           @endforeach
         @else
           <tr>
-            <td colspan="6" class="text-center">Aucun partenaire trouvé.</td>
+            <td colspan="7" class="text-center">Aucun partenaire trouvé.</td>
           </tr>
         @endif
       </tbody>

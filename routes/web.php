@@ -74,7 +74,12 @@ use Illuminate\Http\Request;
 |
 */
 // Main Page Route
+
+Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+Route::get('sponsorships/statistiques', [SponsorshipController::class, 'statistiques'])->name('sponsorships.statistiques');
+
 Route::get('/', [Analytics::class, 'index'])->middleware(['auth', 'verified','role:admin'])->name('dashboard-analytics');
+
 
 
 // layout
@@ -209,6 +214,16 @@ Route::get('/sponsorships/{id}/contrat', [SponsorshipController::class, 'showCon
 Route::resource('transporteurs', TransporteurController::class);
 Route::resource('vehicules', VehiculeController::class);
 
+Route::get('/test-pdf', function () {
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml('<h1>Hello World</h1>');
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+    return $dompdf->stream('test.pdf');
+});
+Route::get('/sponsorships/{id}/download', [SponsorshipController::class, 'download'])->name('sponsorships.download');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -228,3 +243,4 @@ Route::post('/payment/charge', [PaymentController::class, 'charge'])->name('paym
 
 
 require __DIR__.'/auth.php';
+
