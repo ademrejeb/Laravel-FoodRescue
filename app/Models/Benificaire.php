@@ -17,6 +17,7 @@ class Benificaire extends Model
         'tel',
         'email',
         'type',
+        'image',
     ];
     public function demandes()
     {

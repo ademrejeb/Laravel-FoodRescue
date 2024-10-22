@@ -10,6 +10,13 @@
     <h5 class="mb-0">Détails du bénéficiaire : {{ $benificaire->nom }}</h5>
   </div>
   <div class="card-body">
+  <p><strong>Image :</strong></p>
+@if ($benificaire->image)
+  <img src="{{ asset('storage/' . $benificaire->image) }}" alt="Image de {{ $benificaire->nom }}" class="img-thumbnail" style="max-width: 150px;">
+@else
+  <span class="text-muted">Aucune image</span>
+@endif
+
     <p><strong>Adresse :</strong> {{ $benificaire->adresse }}</p>
     <p><strong>Téléphone :</strong> {{ $benificaire->tel }}</p>
     <p><strong>Email :</strong> {{ $benificaire->email }}</p>

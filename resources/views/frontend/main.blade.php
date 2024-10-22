@@ -213,89 +213,71 @@
     </div>
   
   </div> <!-- .featured-donate -->
-  
-  
   <div class="site-section bg-light">
     <div class="container">
-      <div class="row mb-5">
-        <div class="col-md-12">
-          <h2>Dernières Nouvelles</h2>
+        <div class="row mb-5">
+            <div class="col-md-12 text-center">
+                <h2>Derniers Bénéficiaires</h2>
+                <p class="lead">Découvrez les derniers bénéficiaires de nos actions.</p>
+            </div>
         </div>
-      </div>
-  
-      <div class="row">
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="post-entry">
-            <a href="#" class="mb-3 img-wrap">
-              <img src="{{ asset('import/images/img_4.jpg')}}" alt="Image illustrative" class="img-fluid">
-            </a>
-            <h3><a href="#">Devenez Bénévole Aujourd'hui</a></h3>
-            <span class="date mb-4 d-block text-muted">26 Juillet 2018</span>
-            <p>Loin derrière les montagnes des mots, loin des pays de Vokalia et Consonantia.</p>
-            <p><a href="#" class="link-underline">Lire la Suite</a></p>
-          </div>
+
+        <div class="row">
+            @foreach($benificaires as $benif)
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
+                    <div class="post-entry border rounded shadow-sm p-3">
+                        <a href="#" class="mb-3 img-wrap">
+                            <img src="{{ asset('storage/' . $benif->image) }}" alt="{{ $benif->nom }}" class="img-fluid rounded">
+                        </a>
+                        <h3 class="font-weight-bold"><a href="#">{{ $benif->nom }}</a></h3>
+                        <span class="date mb-2 d-block text-muted">{{ $benif->created_at->format('d M Y') }}</span>
+                        <p class="mb-3"><i class="ion-ios-location" aria-hidden="true"></i> {{ $benif->adresse }}</p>
+
+                        <!-- Div pour la carte -->
+                        <div id="map-{{ $benif->id }}" style="height: 200px; border: 1px solid #ddd; border-radius: 4px;"></div>
+                    </div>
+                </div>
+            @endforeach
         </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="post-entry">
-            <a href="#" class="mb-3 img-wrap">
-              <img src="{{ asset('import/images/img_5.jpg')}}" alt="Image illustrative" class="img-fluid">
-            </a>
-            <h3><a href="#">Vous Pouvez Sauver La Vie d'un Enfant</a></h3>
-            <span class="date mb-4 d-block text-muted">26 Juillet 2018</span>
-            <p>Loin derrière les montagnes des mots, loin des pays de Vokalia et Consonantia.</p>
-            <p><a href="#" class="link-underline">Lire la Suite</a></p>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="post-entry">
-            <a href="#" class="mb-3 img-wrap">
-              <img src="{{ asset('import/images/img_6.jpg')}}" alt="Image illustrative" class="img-fluid">
-            </a>
-            <h3><a href="#">Les Enfants Qui Ont Besoin de Soins</a></h3>
-            <span class="date mb-4 d-block text-muted">26 Juillet 2018</span>
-            <p>Loin derrière les montagnes des mots, loin des pays de Vokalia et Consonantia.</p>
-            <p><a href="#" class="link-underline">Lire la Suite</a></p>
-          </div>
-        </div>
-      </div>
     </div>
-  </div> <!-- .section -->
-  
-  
-  <div class="featured-section overlay-color-2" style="background-image: url('images/bg_2.jpg');">
-    
-    <div class="container">
-      <div class="row">
-  
-        <div class="col-md-6 mb-5 mb-md-0">
-          <img src="{{ asset('import/images/bg_2.jpg')}}" alt="Image illustrative" class="img-fluid">
-        </div>
-  
-        <div class="col-md-6 pl-md-5">
-  
-          <div class="form-volunteer">
-            
-            <h2>Devenez Bénévole Aujourd'hui</h2>
-            <form action="#" method="post">
-              <div class="form-group">
-                <input type="text" class="form-control py-2" id="name" placeholder="Entrez votre nom">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control py-2" id="email" placeholder="Entrez votre email">
-              </div>
-              <div class="form-group">
-                <textarea name="v_message" id="" cols="30" rows="3" class="form-control py-2" placeholder="Écrivez votre message"></textarea>
-              </div>
-              <div class="form-group">
-                <input type="submit" class="btn btn-white px-5 py-2" value="Envoyer">
-              </div>
-            </form>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  
-  </div> <!-- .featured-donate -->
-  @endsection
-  
+</div>
+
+<!-- Ajout des dépendances Leaflet et des icônes Ionicons -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css">
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    // Initialiser un tableau vide pour les bénéficiaires
+    var benificaires = [];
+
+    // Récupérer les données des bénéficiaires depuis PHP
+    var data = <?php echo json_encode($benificaires->toArray()); ?>;
+
+    // Remplir le tableau avec les données
+    data.forEach(function(benif) {
+        benificaires.push({
+            id: benif.id,
+            nom: benif.nom,
+            latitude: benif.latitude,
+            longitude: benif.longitude
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Boucle à travers chaque bénéficiaire pour initialiser la carte
+        benificaires.forEach(function(benif) {
+            if (benif.latitude && benif.longitude) {
+                var map = L.map('map-' + benif.id).setView([benif.latitude, benif.longitude], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                }).addTo(map);
+                L.marker([benif.latitude, benif.longitude]).addTo(map)
+                    .bindPopup(benif.nom)
+                    .openPopup();
+            }
+        });
+    });
+</script>
+@endsection
