@@ -15,4 +15,8 @@ class Vehicule extends Model
         'capacite',
         'disponibilite'
     ];
+    public function transporteur()
+    {
+        return $this->belongsTo(Transporteur::class);
+    }
 }

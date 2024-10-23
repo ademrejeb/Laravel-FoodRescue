@@ -12,13 +12,21 @@ class VehiculeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $vehicules = Vehicule::latest()->paginate(5);
-
-        return view('vehicules.index',compact('vehicules'))
+        $sortBy = $request->input('sort_by', 'type');  
+        $orderBy = $request->input('order_by', 'asc'); 
+    
+        // Récupérer les véhicules triés
+        $vehicules = Vehicule::orderBy($sortBy, $orderBy)->paginate(5);
+    
+        // Passer les variables de tri à la vue
+        return view('vehicules.index', compact('vehicules', 'sortBy', 'orderBy'))
             ->with(request()->input('page'));
     }
+
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -39,9 +47,9 @@ class VehiculeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required',
-            'capacite' => 'required',
-            'disponibilite' => 'required',
+           'type' => 'required|string',       // 'type' doit être une chaîne de caractères
+            'capacite' => 'required|numeric',  // 'capacite' doit être un nombre
+            'disponibilite' => 'required|string', // 'disponibilite' doit
         ]);
 
         Vehicule::create($request->all());
@@ -49,6 +57,7 @@ class VehiculeController extends Controller
         return redirect()->route('vehicules.index')
                         ->with('success','vehicule created successfully.');
     }
+   
 
     /**
      * Display the specified resource.
@@ -82,9 +91,9 @@ class VehiculeController extends Controller
     public function update(Request $request, Vehicule $vehicule)
     {
         $request->validate([
-            'type' => 'required',
-            'capacite' => 'required',
-            'disponibilite' => 'required',
+           'type' => 'required|string',       // 'type' doit être une chaîne de caractères
+            'capacite' => 'required|numeric',  // 'capacite' doit être un nombre
+            'disponibilite' => 'required|string', // 'disponibilite' 
         ]);
 
         $vehicule->update($request->all());
@@ -106,4 +115,6 @@ class VehiculeController extends Controller
         return redirect()->route('vehicules.index')
                         ->with('success','Vehicule deleted successfully');
     }
+
+   
 }

@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="pull-left">
-                <h2>Laravel 8 CRUD Example</h2>
+                <h2>Liste des véhicules</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('vehicules.create') }}"> Create New vehicule</a>

@@ -44,7 +44,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>disponibilite:</strong>
-                <input type="email" name="disponibilite" class="form-control" placeholder="disponibilite" required>
+                <input type="text" name="disponibilite" class="form-control" placeholder="disponibilite" required>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

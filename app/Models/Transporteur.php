@@ -15,4 +15,9 @@ class Transporteur extends Model
         'telephone',
         'email'
     ];
+
+    public function vehicules()
+    {
+        return $this->hasMany(Vehicule::class);
+    }
 }
