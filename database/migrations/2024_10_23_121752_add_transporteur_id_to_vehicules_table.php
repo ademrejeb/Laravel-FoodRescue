@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::table('vehicules', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('transporteur_id')->nullable(); // Ajoute la colonne transporteur_id
-            $table->foreign('transporteur_id')->references('id')->on('transporteurs')->onDelete('set null');
         });
     }
 
@@ -25,8 +23,6 @@ return new class extends Migration
     {
         Schema::table('vehicules', function (Blueprint $table) {
             //
-            $table->dropForeign(['transporteur_id']); // Supprime la contrainte de clé étrangère
-        $table->dropColumn('transporteur_id'); // Supprime la colonne transporteur_id
         });
     }
 };

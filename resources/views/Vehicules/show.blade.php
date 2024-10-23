@@ -33,5 +33,10 @@
                 {{ $vehicule->disponibilite }}
             </div>
         </div>
+        <div class="mb-3">
+                    <strong>transporteur:</strong>
+                    <p>{{ $vehicule->Transporteur->nom }}</p>
+                </div>
+
     </div>
 @endsection

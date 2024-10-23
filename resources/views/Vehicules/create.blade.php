@@ -47,6 +47,22 @@
                 <input type="text" name="disponibilite" class="form-control" placeholder="disponibilite" required>
             </div>
         </div>
+
+        <div class="mb-3">
+    <label for="transporteur_id" class="form-label">Transporteur</label>
+    <select name="transporteur_id" class="form-select" required>
+        @foreach($Transporteur as $transporteur)
+            <option value="{{ $transporteur->id }}" {{ old('transporteur_id') == $transporteur->id ? 'selected' : '' }}>
+                {{ $transporteur->nom }}
+            </option>
+        @endforeach
+    </select>
+</div>
+
+
+
+
+
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

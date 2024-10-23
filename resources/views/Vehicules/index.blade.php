@@ -26,6 +26,7 @@
             <th>Type</th>
             <th>capacite</th>
             <th>disponibilite</th>
+            <th>Transporteur</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($vehicules as $vehicule)
@@ -34,6 +35,8 @@
             <td>{{ $vehicule->type }}</td>
             <td>{{ $vehicule->capacite }}</td>
             <td>{{ $vehicule->disponibilite }}</td>
+            <td>{{ optional($vehicule->transporteur)->nom }}</td>
+
             <td>
                 <form action="{{ route('vehicules.destroy', $vehicule->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('vehicules.show', $vehicule->id) }}">Show</a>
