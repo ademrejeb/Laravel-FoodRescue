@@ -12,12 +12,14 @@
   <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
+
   <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
   crossorigin="anonymous"></script>
         <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
   <script>
 
     // Enable pusher logging - don't include this in production
@@ -34,6 +36,9 @@
     });
   </script>
   
+      alert(JSON.stringify(data));
+    });
+  </script>
   
   <!-- Include Styles -->
   @include('layouts/sections/styles')

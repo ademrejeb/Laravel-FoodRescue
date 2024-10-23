@@ -62,6 +62,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RecurringCollectionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

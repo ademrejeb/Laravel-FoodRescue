@@ -31,6 +31,7 @@ class LoginRequest extends FormRequest
             'password' => ['required', 'string'],
             'g-recaptcha-response' =>  'required |captcha' 
             ,
+
         ];
     }
 
