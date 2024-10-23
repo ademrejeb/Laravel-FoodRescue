@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="pull-left">
-                <h2>Laravel 8 CRUD Example</h2>
+                <h2>Liste des véhicules</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('vehicules.create') }}"> Create New vehicule</a>
@@ -26,6 +26,7 @@
             <th>Type</th>
             <th>capacite</th>
             <th>disponibilite</th>
+            <th>Transporteur</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($vehicules as $vehicule)
@@ -34,6 +35,8 @@
             <td>{{ $vehicule->type }}</td>
             <td>{{ $vehicule->capacite }}</td>
             <td>{{ $vehicule->disponibilite }}</td>
+            <td>{{ optional($vehicule->transporteur)->nom }}</td>
+
             <td>
                 <form action="{{ route('vehicules.destroy', $vehicule->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('vehicules.show', $vehicule->id) }}">Show</a>

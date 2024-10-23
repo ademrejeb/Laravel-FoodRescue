@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('type');
             $table->integer('capacite');
             $table->string('disponibilite');
+            $table->unsignedBigInteger('transporteur_id'); // Clé étrangère
+            $table->foreign('transporteur_id')->references('id')->on('transporteurs')->onDelete('cascade'); // Relation
             $table->timestamps();
         });
     }

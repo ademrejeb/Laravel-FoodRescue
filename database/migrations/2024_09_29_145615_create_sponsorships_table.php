@@ -16,7 +16,7 @@ class CreateSponsorshipsTable extends Migration
             $table->date('date_debut');
             $table->date('date_fin');
             $table->timestamps();
-
+            $table->string('signature')->nullable();
             // Clé étrangère
             $table->foreign('partenaire_id')->references('id')->on('partenaires')->onDelete('cascade');
         });

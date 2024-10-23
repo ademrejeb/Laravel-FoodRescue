@@ -13,7 +13,7 @@
         <small class="text-muted float-end">Tous les champs sont obligatoires</small>
       </div>
       <div class="card-body">
-        <form action="{{ route('benificaires.store') }}" method="POST">
+      <form action="{{ route('benificaires.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="nom">Nom</label>
@@ -75,6 +75,16 @@
               @enderror
             </div>
           </div>
+          <div class="row mb-3">
+  <label class="col-sm-2 col-form-label" for="image">Image</label>
+  <div class="col-sm-10">
+    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="image" />
+    @error('image')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
+
           <div class="row justify-content-end">
             <div class="col-sm-10">
               <button type="submit" class="btn btn-primary">Envoyer</button>

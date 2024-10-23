@@ -18,6 +18,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th>Image</th>
           <th>Name</th>
           <th>Address</th>
           <th>Phone Number</th>
@@ -29,8 +30,16 @@
       <tbody class="table-border-bottom-0">
         @foreach($benificaires as $benif)
         <tr>
+        <td>
+  @if ($benif->image)
+    <img src="{{ asset('storage/' . $benif->image) }}" alt="Image de {{ $benif->nom }}" class="img-thumbnail" style="max-width: 50px;">
+  @else
+    <span class="text-muted">Aucune image</span>
+  @endif
+</td>
+
           <td>{{ $benif->nom }}</td>
-          <td>{{ $benif->addresse }}</td>
+          <td>{{ $benif->adresse }}</td>
           <td>{{ $benif->tel }}</td>
           <td>{{ $benif->email }}</td>
           <td>{{ $benif->type }}</td>

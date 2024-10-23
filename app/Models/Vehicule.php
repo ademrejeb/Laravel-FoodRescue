@@ -13,6 +13,11 @@ class Vehicule extends Model
     protected $fillable = [
         'type',
         'capacite',
-        'disponibilite'
+        'disponibilite', 
+        'transporteur_id'
     ];
+    public function transporteur()
+    {
+        return $this->belongsTo(Transporteur::class);
+    }
 }

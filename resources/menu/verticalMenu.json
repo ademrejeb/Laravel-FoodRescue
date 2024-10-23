@@ -110,7 +110,7 @@
     },
     {
       "name": "Partenaires et sponsorships",
-      "icon": "menu-icon tf-icons bx bx-truck",
+      "icon": "menu-icon tf-icons bx bx-money",
       "slug": "partenaires-et-sponsorships",
       "submenu": [
         {
@@ -122,6 +122,11 @@
           "url": "/sponsorships",
           "name": "Sponsorships",
           "slug": "sponsorships"
+        },
+        {
+          "url": "/sponsorships/statistiques",
+          "name": "Statistics",
+          "slug": "Statistics"
         }
       ]
     },

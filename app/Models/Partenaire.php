@@ -14,11 +14,17 @@ class Partenaire extends Model
         'type',
         'contact',
         'secteur_activite',
+        'logo',
+        'website_url',
     ];
 
     // Relation One-to-Many avec Sponsorship
     public function sponsorships()
     {
         return $this->hasMany(Sponsorship::class);
+    }
+    public function contributions()
+    {
+        return $this->hasMany(Contribution::class);
     }
 }

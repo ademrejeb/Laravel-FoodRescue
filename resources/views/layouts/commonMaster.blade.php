@@ -32,7 +32,7 @@
     var channel = pusher.subscribe('popup-channel');
     channel.bind('user-register', function(data) {
      
-      toastr.success(JSON.stringify(data.name) + ' has been created');
+      alert(JSON.stringify(data.message) + ' has been created');
     });
   </script>
   

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>RescueFood &mdash; </title>
+  <title>@yield('title1', 'Rescue Food')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,500|Dosis:400,700" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('import/css/open-iconic-bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('import/css/animate.css') }}">
@@ -25,10 +25,10 @@
 
   </head>
   <body>
-    
+
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
   <div class="container">
-   
+
     <a class="navbar-brand" href="index.html">RescueFood</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="oi oi-menu"></span> Menu
@@ -40,27 +40,27 @@
         <li class="nav-item"><a href="how-it-works.html" class="nav-link">Comment ça marche</a></li>
         <li class="nav-item"><a href="donate.html" class="nav-link">Proposer une Offre</a></li>
         <li class="nav-item"><a href="actions.html" class="nav-link">Nos Actions</a></li>
-        
+
         <li class="nav-item"><a href="about.html" class="nav-link">À propos</a></li>
         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-       
+
           @auth
-             
+
               <li class="nav-item">
-                  <a href="{{ route('logout') }}" 
+                  <a href="{{ route('logout') }}"
                      class="nav-link"
                      onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                       Logout
                   </a>
               </li>
-      
-            
+
+
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
               </form>
-         
+
           @endauth
-      
+
       </ul>
     </div>
   </div>
@@ -78,7 +78,7 @@
         {{ session('error') }}
     </div>
 @endif
-  
+
     @yield('content')
 
     <div class="container my-5">
@@ -134,6 +134,7 @@
       </form>
   </div>
   <div id="map" style="height: 400px; margin: 20px 0;"></div>
+
 
   <footer class="footer">
       <div class="container">
@@ -242,7 +243,7 @@
           </ul>
         </div>
       </div>
-      
+
     </div>
     <div class="row pt-5">
       <div class="col-md-12 text-center">
