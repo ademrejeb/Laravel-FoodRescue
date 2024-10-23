@@ -62,6 +62,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RecurringCollectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -168,6 +170,12 @@ Route::delete('/donatorslist/{id}', [DonatorController::class, 'destroy'])->name
 
 Route::resource('collectes', CollecteController::class);
 Route::resource('livraisons', LivraisonController::class);
+Route::get('livraisons/export/pdf', [LivraisonController::class, 'exportPDF'])->name('livraisons.export.pdf');
+Route::get('livraisons/export/csv', [LivraisonController::class, 'exportCSV'])->name('livraisons.export.csv');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/recurring-collections/create', [RecurringCollectionController::class, 'create'])->name('recurring-collections.create');
+    Route::post('/recurring-collections', [RecurringCollectionController::class, 'store'])->name('recurring-collections.store');
+});
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified','role:client'])->name('home');
 Route::prefix('categories')->group(function () {

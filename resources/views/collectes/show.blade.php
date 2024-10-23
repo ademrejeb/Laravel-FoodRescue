@@ -9,6 +9,10 @@
             <div class="card-body">
                 <h5>Date de Collecte: <strong>{{ $collecte->date_collecte }}</strong></h5>
                 <h5>Statut: <strong>{{ $collecte->statut }}</strong></h5>
+                <h5>Quantité Collectée: <strong>{{ $collecte->quantite_collecte }}</strong></h5>
+                @if ($collecte->donateur_id)
+                    <h5>Donateur: <strong>{{ $collecte->donateur->name }}</strong></h5>
+                @endif
             </div>
         </div>
 

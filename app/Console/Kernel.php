@@ -15,6 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('rapports:generate daily')->daily();
+        $schedule->command('rapports:generate weekly')->weekly();
+        $schedule->command('rapports:generate monthly')->monthly();
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
             $contrats = Contrat::where('date_fin', '<=', now()->addDays(30))->get();

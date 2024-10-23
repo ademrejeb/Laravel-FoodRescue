@@ -21,9 +21,19 @@
     </div>
 @endif
 
-<!-- Bouton d'ajout de Livraison -->
-<div class="mb-3">
+<!-- Boutons d'ajout et d'exportation -->
+<div class="mb-3 d-flex justify-content-between">
     <a href="{{ route('livraisons.create') }}" class="btn btn-primary">Ajouter une Livraison</a>
+    
+    <div>
+        <a href="{{ route('livraisons.export.csv') }}" class="btn btn-outline-secondary" title="Exporter en CSV">
+            <i class="bx bx-file"></i>
+        </a>
+        <a href="{{ route('livraisons.export.pdf') }}" class="btn btn-outline-danger" title="Exporter en PDF">
+            <i class="bx bxs-file-pdf"></i>
+        </a>
+        
+    </div>
 </div>
 
 <!-- Table des Livraisons -->

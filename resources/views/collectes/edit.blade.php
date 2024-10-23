@@ -30,6 +30,19 @@
                     <option value="terminé" {{ $collecte->statut == 'terminé' ? 'selected' : '' }}>Terminé</option>
                 </select>
             </div>
+            <div class="mb-3">
+                <label for="quantite_collecte" class="form-label">Quantité Collectée</label>
+                <input type="number" class="form-control" id="quantite_collecte" name="quantite_collecte" value="{{ $collecte->quantite_collecte }}" min="0" step="1" required>
+            </div>
+            <div class="mb-3">
+                <label for="donateur_id" class="form-label">Donateur</label>
+                <select class="form-select" id="donateur_id" name="donateur_id">
+                    <option value="">Sélectionner un donateur</option>
+                    @foreach ($donateurs as $donateur)
+                        <option value="{{ $donateur->id }}" {{ $collecte->donateur_id == $donateur->id ? 'selected' : '' }}>{{ $donateur->name }}</option>
+                    @endforeach
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Modifier</button>
             <a href="{{ route('collectes.index') }}" class="btn btn-secondary">Annuler</a>
         </form>

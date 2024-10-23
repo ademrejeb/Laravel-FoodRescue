@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="{{ asset('import/css/fancybox.min.css') }}">
 <link rel="stylesheet" href="{{ asset('import/css/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ asset('import/css/style.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   </head>
   <body>
@@ -79,9 +81,104 @@
 
     @yield('content')
 
+    <div class="container my-5">
+      <h2 class="text-center mb-4">Formulaire de Prise en Charge</h2>
+  
+      @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
+  
+      <form action="{{ route('recurring-collections.store') }}" method="POST" class="mx-auto" novalidate style="max-width: 600px;">
+          @csrf
+          <div class="form-group">
+              <label for="name">Nom et Prénom</label>
+              <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
+          </div>
+          <div class="form-group">
+              <label for="email">Adresse E-mail</label>
+              <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
+          </div>
+          <div class="form-group">
+              <label for="phone">Numéro de Téléphone</label>
+              <input type="tel" name="phone" id="phone" class="form-control" value="{{ old('phone') }}" required>
+          </div>
+          <div class="form-group">
+              <label for="frequency">Fréquence de Collecte</label>
+              <select name="frequency" id="frequency" class="form-control" required>
+                  <option value="">Choisissez une option</option>
+                  <option value="quotidienne" {{ old('frequency') == 'quotidienne' ? 'selected' : '' }}>Quotidienne</option>
+                  <option value="hebdomadaire" {{ old('frequency') == 'hebdomadaire' ? 'selected' : '' }}>Hebdomadaire</option>
+                  <option value="mensuelle" {{ old('frequency') == 'mensuelle' ? 'selected' : '' }}>Mensuelle</option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="comments">Commentaires Supplémentaires</label>
+              <textarea name="comments" id="comments" class="form-control" rows="3">{{ old('comments') }}</textarea>
+          </div>
+          <div class="form-group">
+              <label for="contact-preference">Préférences de Contact</label>
+              <select name="contact_preference" id="contact-preference" class="form-control" required>
+                  <option value="">Choisissez une option</option>
+                  <option value="email" {{ old('contact_preference') == 'email' ? 'selected' : '' }}>E-mail</option>
+                  <option value="phone" {{ old('contact_preference') == 'phone' ? 'selected' : '' }}>Téléphone</option>
+                  <option value="sms" {{ old('contact_preference') == 'sms' ? 'selected' : '' }}>SMS</option>
+              </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Soumettre</button>
+      </form>
+  </div>
+  <div id="map" style="height: 400px; margin: 20px 0;"></div>
 
 
-
+  <footer class="footer">
+      <div class="container">
+          <div class="row mb-5">
+              <div class="col-md-6 col-lg-4">
+                  <h3 class="heading-section">À Propos de Nous</h3>
+                  <p class="lead">Loin, derrière les montagnes de mots, loin des pays Vokalia et Consonantia, vivent des textes aveugles.</p>
+                  <p class="mb-5">Séparés, ils vivent dans Bookmarksgrove, juste à la côte de la sémantique, un vaste océan de langue.</p>
+                  <p><a href="#" class="link-underline">Lire Plus</a></p>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <h3 class="heading-section">Derniers Articles de Blog</h3>
+                  <div class="block-21 d-flex mb-4">
+                      <figure class="mr-3">
+                          <img src="{{ asset('import/images/img_1.jpg')}}" alt="Image illustrative" class="img-fluid">
+                      </figure>
+                      <div class="text">
+                          <h3 class="heading"><a href="#">L'eau, c'est la vie. Eau potable en milieu urbain</a></h3>
+                          <div class="meta">
+                              <div><a href="#"><span class="icon-calendar"></span> 29 Juillet 2018</a></div>
+                              <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                              <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="block-21 d-flex mb-4">
+                      <figure class="mr-3">
+                          <img src="{{ asset('import/images/img_2.jpg')}}" alt="Image illustrative" class="img-fluid">
+                      </figure>
+                      <div class="text">
+                          <h3 class="heading"><a href="#">La vie est courte, alors soyez gentil</a></h3>
+                          <div class="meta">
+                              <div><a href="#"><span class="icon-calendar"></span> 29 Juillet 2018</a></div>
+                              <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                              <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+  
 
 <footer class="footer">
   <div class="container">
@@ -178,10 +275,24 @@
 <script src="{{ asset('import/js/jquery.animateNumber.min.js') }}"></script>
 
 <!-- Google Maps API -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 
 <script src="{{ asset('import/js/google-map.js') }}"></script>
 <script src="{{ asset('import/js/main.js') }}"></script>
+<script>
+  // Initialisation de la carte
+  var map = L.map('map').setView([36.8065, 10.1815], 13); // Remplacez les coordonnées par celles souhaitées
+
+  // Ajouter une couche de tuiles (OpenStreetMap par exemple)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  // Ajouter un marqueur
+  var marker = L.marker([36.8065, 10.1815]).addTo(map);
+  marker.bindPopup('<b>Bienvenue à RescueFood!</b>').openPopup();
+</script>
+
 
   </body>
 </html>

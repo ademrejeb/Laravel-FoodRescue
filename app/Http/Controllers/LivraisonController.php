@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Livraison;
 use App\Models\Collecte;
 use Illuminate\Http\Request;
+use PDF;
+use Illuminate\Support\Facades\Response;
 
 class LivraisonController extends Controller
 {
@@ -82,5 +84,34 @@ class LivraisonController extends Controller
     {
         $livraison->delete();
         return redirect()->route('livraisons.index')->with('success', 'Livraison supprimée.');
+    }
+
+    // Export PDF
+    public function exportPDF()
+    {
+        $livraisons = Livraison::with('collecte')->get();
+        $pdf = PDF::loadView('livraisons.pdf', compact('livraisons'));
+        return $pdf->download('livraisons.pdf');
+    }
+
+    // Export CSV
+    public function exportCSV()
+    {
+        $livraisons = Livraison::with('collecte')->get();
+        $filename = "livraisons.csv";
+        $handle = fopen($filename, 'w+');
+        fputcsv($handle, ['Date de Livraison', 'Statut', 'Date de Collecte']);
+
+        foreach ($livraisons as $livraison) {
+            fputcsv($handle, [
+                $livraison->date_livraison, 
+                $livraison->statut, 
+                $livraison->collecte->date_collecte
+            ]);
+        }
+
+        fclose($handle);
+
+        return Response::download($filename, $filename, ['Content-Type' => 'text/csv']);
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('collecte_id')->constrained()->onDelete('cascade'); // relation avec collecte
             $table->date('date_livraison'); // date de livraison
             $table->enum('statut', ['en cours', 'livré']); // statut de la livraison
+            $table->string('localisation_livreur')->nullable(); // ajout du champ localisation
             $table->timestamps();
         });
     }
@@ -26,5 +27,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('livraisons');
+        
     }
 };
