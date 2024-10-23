@@ -30,8 +30,9 @@
             <i class="bx bx-file"></i>
         </a>
         <a href="{{ route('livraisons.export.pdf') }}" class="btn btn-outline-danger" title="Exporter en PDF">
-            <i class="bx bx-file-pdf"></i>
+            <i class="bx bxs-file-pdf"></i>
         </a>
+        
     </div>
 </div>
 
