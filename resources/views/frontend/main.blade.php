@@ -257,6 +257,11 @@
             <p><a href="#" class="link-underline">Lire la Suite</a></p>
           </div>
         </div>
+        @foreach ($offres as $offre)
+        <x-offre-card :offre="$offre" />
+        @endforeach
+        
+       
       </div>
     </div>
   </div> <!-- .section -->

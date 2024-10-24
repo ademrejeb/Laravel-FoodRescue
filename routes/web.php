@@ -57,11 +57,12 @@ use App\Http\Controllers\CollecteController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
+use App\Http\Controllers\OffreController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
-use Illuminate\Http\Request;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RecurringCollectionController;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -221,6 +222,16 @@ Route::middleware(['auth', 'verified', 'role:client'])->group(function () {
 });
 Route::get('/payment', [PaymentController::class, 'create'])->name('payment.create');
 Route::post('/payment/charge', [PaymentController::class, 'charge'])->name('payment.charge');
+Route::prefix('offres')->middleware(['auth', 'verified','role:admin'])->group(function () {
+    Route::get('/', [OffreController::class, 'index'])->name('offres.index'); 
+    Route::get('/create', [OffreController::class, 'create'])->name('offres.create'); 
+    Route::post('/', [OffreController::class, 'store'])->name('offres.store'); 
+    Route::get('/{id}', [OffreController::class, 'show'])->name('offres.show'); 
+    Route::get('/{id}/edit', [OffreController::class, 'edit'])->name('offres.edit'); 
+    Route::put('/{id}', [OffreController::class, 'update'])->name('offres.update'); 
+    Route::delete('/{id}', [OffreController::class, 'destroy'])->name('offres.destroy');
+});
+Route::post('review-store', [OffreController::class,'reviewstore'])->name('review.store');
 
 
 require __DIR__.'/auth.php';

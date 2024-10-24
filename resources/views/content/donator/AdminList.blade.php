@@ -6,6 +6,9 @@
 <h4 class="py-3 mb-4">
   <span class="text-muted fw-light">Tables /</span> Donator List
 </h4>
+<div class="mb-3">
+  <a href="{{ route('donators.create') }}" class="btn btn-primary">{{ __('add_donator') }}</a>
+</div>
 
 <!-- Donator Table -->
 <div class="card">

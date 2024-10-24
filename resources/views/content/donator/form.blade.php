@@ -19,8 +19,9 @@
       <div class="card-header d-flex align-items-center justify-content-between">
         <h5 class="mb-0">Fill this form with your details</h5> <small class="text-muted float-end">All fields are required</small>
       </div>
+   
       <div class="card-body">
-        <form  action="{{ route('donators.store') }}" method="POST">
+        <form  action="{{ route('donators.store') }}" method="POST" novalidate>
         @csrf  
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Name</label>

@@ -19,4 +19,8 @@ class Donator extends Model
         'email',
         'type',
     ];
+    public function Offre()
+    {
+        return $this->hasMany(Offre::class);
+    }
 }

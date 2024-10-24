@@ -166,25 +166,21 @@
       ]
     },
     {
-      "name": "Misc",
+      "name": "Gestion Des Offres",
       "icon": "menu-icon tf-icons bx bx-cube-alt",
       "slug": "pages-misc",
       "submenu": [
         {
-          "url": "pages/faq",
-          "name": "FAQ",
+          "url": "/donatorslist",
+          "name": "Donators",
           "slug": "pages-faq"
         },
         {
-          "url": "pages/help-center",
-          "name": "Help Center",
+          "url": "offres",
+          "name": "Offres",
           "slug": "pages-help-center"
-        },
-        {
-          "url": "pages/maintenance",
-          "name": "Maintenance",
-          "slug": "pages-maintenance"
         }
+        
       ]
     },
     {

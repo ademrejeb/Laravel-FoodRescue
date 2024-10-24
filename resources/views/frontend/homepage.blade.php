@@ -22,6 +22,9 @@
 <link rel="stylesheet" href="{{ asset('import/css/style.css') }}">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      
+      
 
   </head>
   <body>
@@ -80,7 +83,6 @@
 @endif
   
     @yield('content')
-
     <div class="container my-5">
       <h2 class="text-center mb-4">Formulaire de Prise en Charge</h2>
   
@@ -133,51 +135,7 @@
           <button type="submit" class="btn btn-primary btn-block">Soumettre</button>
       </form>
   </div>
-  <div id="map" style="height: 400px; margin: 20px 0;"></div>
-
-  <footer class="footer">
-      <div class="container">
-          <div class="row mb-5">
-              <div class="col-md-6 col-lg-4">
-                  <h3 class="heading-section">À Propos de Nous</h3>
-                  <p class="lead">Loin, derrière les montagnes de mots, loin des pays Vokalia et Consonantia, vivent des textes aveugles.</p>
-                  <p class="mb-5">Séparés, ils vivent dans Bookmarksgrove, juste à la côte de la sémantique, un vaste océan de langue.</p>
-                  <p><a href="#" class="link-underline">Lire Plus</a></p>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                  <h3 class="heading-section">Derniers Articles de Blog</h3>
-                  <div class="block-21 d-flex mb-4">
-                      <figure class="mr-3">
-                          <img src="{{ asset('import/images/img_1.jpg')}}" alt="Image illustrative" class="img-fluid">
-                      </figure>
-                      <div class="text">
-                          <h3 class="heading"><a href="#">L'eau, c'est la vie. Eau potable en milieu urbain</a></h3>
-                          <div class="meta">
-                              <div><a href="#"><span class="icon-calendar"></span> 29 Juillet 2018</a></div>
-                              <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                              <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                          </div>
-                      </div>
-                  </div>
-  
-                  <div class="block-21 d-flex mb-4">
-                      <figure class="mr-3">
-                          <img src="{{ asset('import/images/img_2.jpg')}}" alt="Image illustrative" class="img-fluid">
-                      </figure>
-                      <div class="text">
-                          <h3 class="heading"><a href="#">La vie est courte, alors soyez gentil</a></h3>
-                          <div class="meta">
-                              <div><a href="#"><span class="icon-calendar"></span> 29 Juillet 2018</a></div>
-                              <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                              <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </footer>
-  
+<div id="map" style="height: 400px; margin: 20px 0;"></div>
 
 <footer class="footer">
   <div class="container">
@@ -293,5 +251,4 @@
 </script>
 
 
-  </body>
 </html>
