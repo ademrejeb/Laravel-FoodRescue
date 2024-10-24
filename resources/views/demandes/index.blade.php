@@ -19,6 +19,7 @@
       <thead>
         <tr>
           <th>Type de produit</th>
+          <th>Priorité</th>
           <th>Quantité</th>
           <th>Fréquence de besoin</th>
           <th>Bénéficiaire</th>
@@ -31,29 +32,33 @@
         @foreach($demandes as $demande)
         <tr>
           <td>{{ $demande->type_produit }}</td>
+          <td>{{ $demande->priorite }}</td>
           <td>{{ $demande->quantite }}</td>
           <td>{{ $demande->frequence_besoin }}</td>
           <td>{{ $demande->benificaire->nom }}</td>
           <td>{{ $demande->statut }}</td>
           <td>{{ $demande->created_at }}</td>
           <td>
-              <div class="dropdown">
-                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                  <i class="bx bx-dots-vertical-rounded"></i>
-                </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="{{ route('demandes.show', $demande->id) }}">
-                    <i class="bx bx-show me-1"></i> Voir
-                  </a>
-                  <a class="dropdown-item" href="{{ route('demandes.edit', $demande->id) }}">
-                    <i class="bx bx-edit-alt me-1"></i> Modifier
-                  </a>
-                  <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{ $demande->id }}">
-                    <i class="bx bx-trash me-1"></i> Supprimer
-                  </button>
-                </div>
-              </div>
-          </td>
+    <div class="dropdown">
+        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+            <i class="bx bx-dots-vertical-rounded"></i>
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ route('demandes.show', $demande->id) }}">
+                <i class="bx bx-show me-1"></i> Voir
+            </a>
+            <a class="dropdown-item" href="{{ route('demandes.edit', $demande->id) }}">
+                <i class="bx bx-edit-alt me-1"></i> Modifier
+            </a>
+            <a class="dropdown-item" href="{{ route('demandes.match', $demande->id) }}">
+                <i class="bx bx-search me-1"></i> Voir Correspondance
+            </a>
+            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{ $demande->id }}">
+                <i class="bx bx-trash me-1"></i> Supprimer
+            </button>
+        </div>
+    </div>
+</td>
         </tr>
         @endforeach
       </tbody>

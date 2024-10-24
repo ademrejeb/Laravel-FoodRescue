@@ -243,5 +243,5 @@ Route::prefix('offres')->middleware(['auth', 'verified','role:admin'])->group(fu
 });
 Route::post('review-store', [OffreController::class,'reviewstore'])->name('review.store');
 Route::get('/demandes/{id}/match', [DemandeController::class, 'checkMatches'])->name('demandes.match');
-
+Route::get('/dashboardBenif', [BenificaireController::class, 'dashboard'])->middleware('auth')->name('dashboardBenif');
 require __DIR__.'/auth.php';

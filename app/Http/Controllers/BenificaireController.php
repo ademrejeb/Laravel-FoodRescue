@@ -12,15 +12,6 @@ class BenificaireController extends Controller
     public function index()
 {
     $benificaires = Benificaire::all();
-
-    // Calculer la priorité pour chaque bénéficiaire
-    foreach ($benificaires as $benificaire) {
-        $benificaire->priority = $this->calculatePriority($benificaire);
-    }
-
-    // Trier les bénéficiaires par priorité
-    $benificaires = $benificaires->sortByDesc('priority');
-
     return view('content.benificaires.BenificairesList', compact('benificaires'));
 }
 
@@ -120,42 +111,6 @@ class BenificaireController extends Controller
 
         return redirect()->route('benificaires.index')->with('success', 'Bénéficiaire supprimé avec succès.');
     }
-    public function dashboard()
-{
-    $notifications = auth()->user()->notifications;
-
-    return view('content.benificaires.dashboard', compact('notifications'));
-}
-public function calculatePriority(Benificaire $benificaire)
-{
-    // Initialiser la priorité à 0
-    $priority = 0;
-
-    // Critère 2: Taille de l'organisation (en fonction du nombre de demandes ou des besoins réguliers)
-    $demandesCount = $benificaire->demandes->count();
-    if ($demandesCount > 10) {
-        $priority += 30; // Grande organisation, on ajoute 30
-    } elseif ($demandesCount > 5) {
-        $priority += 15; // Moyenne organisation, on ajoute 15
-    }
-
-    // Critère 3: Fréquence des besoins (demande quotidienne a plus de priorité)
-    foreach ($benificaire->demandes as $demande) {
-        if ($demande->frequence_besoin === 'quotidien') {
-            $priority += 40; // Priorité forte pour besoins quotidiens
-        } elseif ($demande->frequence_besoin === 'hebdomadaire') {
-            $priority += 20; // Moins de priorité pour besoins hebdomadaires
-        }
-    }
-
-    // Critère 4: Type du bénéficiaire (par exemple, organisation caritative peut avoir plus de priorité)
-    if ($benificaire->type === 'Organisation caritative') {
-        $priority += 25; // Organisation caritative, ajout de 25 points
-    }
-
-    // Retourner le score final de priorité
-    return $priority;
-}
 
 
 }

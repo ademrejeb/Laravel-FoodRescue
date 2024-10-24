@@ -12,7 +12,7 @@ class DemandeController extends Controller
 {
     public function index()
     {
-        $demandes = Demande::with('benificaire')->get();
+        $demandes = Demande::orderBy('priorite', 'desc')->get();
         return view('demandes.index', compact('demandes'));
     }
 
@@ -32,7 +32,11 @@ class DemandeController extends Controller
             'benificaire_id' => 'required|exists:benificaires,id',
         ]);
 
-        Demande::create($request->all());
+        // Créez la demande
+        $demande = Demande::create($request->all());
+
+        // Calcul de la priorité
+        $this->calculerPriorite($demande);
 
         return redirect()->route('demandes.index')->with('success', 'Demande créée avec succès.');
     }
@@ -58,7 +62,11 @@ class DemandeController extends Controller
             'benificaire_id' => 'required|exists:benificaires,id',
         ]);
 
+        // Mettez à jour la demande avec les nouvelles données
         $demande->update($request->all());
+
+        // Recalculez la priorité après mise à jour
+        $this->calculerPriorite($demande);
 
         return redirect()->route('demandes.index')->with('success', 'Demande mise à jour avec succès.');
     }
@@ -68,52 +76,54 @@ class DemandeController extends Controller
         $demande->delete();
         return redirect()->route('demandes.index')->with('success', 'Demande supprimée avec succès.');
     }
+
     public function checkMatches($demandeId)
     {
         $demande = Demande::find($demandeId);
-    
+
         $typeProduit = $demande->type_produit;
         $quantiteDemande = $demande->quantite;
-    
+
         $produitsEnStock = Product::where('name', $typeProduit)
-                                  ->where('quantity', '>=', $quantiteDemande)
-                                  ->where('stock_status', 'disponible')
-                                  ->get();
-    
+            ->where('quantity', '>=', $quantiteDemande)
+            ->where('stock_status', 'disponible')
+            ->get();
+
         // Envoyer une notification si des produits correspondants sont trouvés
         if ($produitsEnStock->count() > 0) {
             $demande->benificaire->notify(new DemandeMatched($demande));
         }
-    
+
         return view('demandes.match', compact('demande', 'produitsEnStock'));
     }
+
     public function calculerPriorite(Demande $demande)
-{
-    $priorite = 0;
+    {
+        $priorite = 0;
 
-    // Facteur 1: Urgence (exemple: "quotidien" a plus de priorité)
-    if ($demande->frequence_besoin == 'quotidien') {
-        $priorite += 3;
-    } elseif ($demande->frequence_besoin == 'hebdomadaire') {
-        $priorite += 2;
-    } else {
-        $priorite += 1;
+        // Facteur 1: Urgence (exemple: "quotidien" a plus de priorité)
+        if ($demande->frequence_besoin == 'quotidien') {
+            $priorite += 3;
+        } elseif ($demande->frequence_besoin == 'hebdomadaire') {
+            $priorite += 2;
+        } else {
+            $priorite += 1;
+        }
+
+        // Facteur 2: Type de bénéficiaire
+        if ($demande->benificaire->type == 'Organisation caritative') {
+            $priorite += 5;
+        } elseif ($demande->benificaire->type == 'Association') {
+            $priorite += 1;
+        }
+
+        // Facteur 3: Type de produit
+        if (in_array($demande->type_produit, ['Lait', 'Riz', 'Eau'])) {
+            $priorite += 3;
+        }
+
+        // Sauvegarde de la priorité
+        $demande->priorite = $priorite;
+        $demande->save();
     }
-
-    
-    if ($demande->benificaire->type == 'Grande Association') {
-        $priorite += 2;
-    } elseif ($demande->benificaire->type == 'Petite Organisation') {
-        $priorite += 1;
-    }
-
-   
-    if (in_array($demande->type_produit, ['Lait', 'Riz', 'Eau'])) {
-        $priorite += 3;
-    }
-    $demande->priorite = $priorite;
-    $demande->save();
-}
-
-    
 }
