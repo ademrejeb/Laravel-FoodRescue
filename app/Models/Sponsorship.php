@@ -15,11 +15,18 @@ class Sponsorship extends Model
         'montant',
         'date_debut',
         'date_fin',
-    ];
+         'signature_sponsor',
+         'signature_entreprise'
 
+    ];
+    protected $dates = ['date_debut', 'date_fin'];
     // Relation Inverse Many-to-One avec Partenaire
     public function partenaire()
     {
         return $this->belongsTo(Partenaire::class);
+    }
+    public function contributions()
+    {
+        return $this->hasMany(Contribution::class);
     }
 }

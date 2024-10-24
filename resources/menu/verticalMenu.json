@@ -110,7 +110,7 @@
     },
     {
       "name": "Partenaires et sponsorships",
-      "icon": "menu-icon tf-icons bx bx-truck",
+      "icon": "menu-icon tf-icons bx bx-money",
       "slug": "partenaires-et-sponsorships",
       "submenu": [
         {
@@ -142,7 +142,7 @@
         }
       ]
     },
-    
+
     {
       "name": "Account Settings",
       "icon": "menu-icon tf-icons bx bx bx-dock-top",
@@ -180,7 +180,7 @@
           "name": "Offres",
           "slug": "pages-help-center"
         }
-        
+
       ]
     },
     {

@@ -23,6 +23,9 @@
 <!-- Bouton d'ajout de Sponsorship -->
 <div class="mb-3">
   <a href="{{ route('sponsorships.create') }}" class="btn btn-primary">Ajouter un Sponsorship</a>
+  
+  <!-- Bouton pour voir les statistiques -->
+  <a href="{{ route('sponsorships.statistiques') }}" class="btn btn-secondary">Voir Statistiques</a> <!-- Modifiez ici avec le bon nom de route -->
 </div>
 
 <!-- Sponsorship Table -->
