@@ -9,7 +9,7 @@ class Demande extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type_produit', 'quantite', 'frequence_besoin', 'statut', 'benificaire_id'];
+    protected $fillable = ['type_produit', 'quantite', 'frequence_besoin', 'statut', 'benificaire_id', 'priorite'];
 
     public function benificaire()
     {

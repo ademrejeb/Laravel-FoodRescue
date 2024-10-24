@@ -52,7 +52,7 @@
                 <label class="col-sm-2 col-form-label" for="statut">Statut</label>
                 <div class="col-sm-10">
                     <select name="statut" class="form-control" id="statut" required>
-                        <option value="en attente">En attente</option>
+                        <option value="en attente">En Attente</option>
                         <option value="satisfait">Satisfait</option>
                     </select>
                 </div>

@@ -12,7 +12,7 @@
         <h5 class="mb-0">Modifier les informations du bénéficiaire</h5>
       </div>
       <div class="card-body">
-        <form action="{{ route('benificaires.update', $benificaire->id) }}" method="POST">
+        <form action="{{ route('benificaires.update', $benificaire->id) }}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
 
@@ -70,6 +70,20 @@
               </select>
             </div>
           </div>
+          <div class="row mb-3">
+  <label class="col-sm-2 col-form-label" for="image">Image</label>
+  <div class="col-sm-10">
+    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="image" />
+    @error('image')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+    <p>Image actuelle :</p>
+    @if ($benificaire->image)
+      <img src="{{ asset('storage/' . $benificaire->image) }}" alt="Image de {{ $benificaire->nom }}" class="img-thumbnail" style="max-width: 150px;">
+    @endif
+  </div>
+</div>
+
 
           <!-- Bouton de soumission -->
           <div class="row justify-content-end">

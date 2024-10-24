@@ -232,6 +232,6 @@ Route::prefix('offres')->middleware(['auth', 'verified','role:admin'])->group(fu
     Route::delete('/{id}', [OffreController::class, 'destroy'])->name('offres.destroy');
 });
 Route::post('review-store', [OffreController::class,'reviewstore'])->name('review.store');
-
+Route::get('/demandes/{id}/match', [DemandeController::class, 'checkMatches'])->name('demandes.match');
 
 require __DIR__.'/auth.php';

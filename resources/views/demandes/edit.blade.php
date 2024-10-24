@@ -54,8 +54,8 @@
                 <label class="col-sm-2 col-form-label" for="statut">Statut</label>
                 <div class="col-sm-10">
                     <select name="statut" class="form-control" id="statut" required>
-                        <option value="en attente" {{ $demande->statut == 'en attente' ? 'selected' : '' }}>En attente</option>
-                        <option value="satisfait" {{ $demande->statut == 'satisfait' ? 'selected' : '' }}>Satisfait</option>
+                        <option value="urgent" {{ $demande->statut == 'en attente' ? 'selected' : '' }}>En Attente</option>
+                        <option value="normal" {{ $demande->statut == 'satisfait' ? 'selected' : '' }}>Satifait</option>
                     </select>
                 </div>
             </div>

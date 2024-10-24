@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Demande;
 use App\Models\Benificaire;
+use App\Models\Product;
+use App\Notifications\DemandeMatched;
 use Illuminate\Http\Request;
 
 class DemandeController extends Controller
@@ -66,4 +68,52 @@ class DemandeController extends Controller
         $demande->delete();
         return redirect()->route('demandes.index')->with('success', 'Demande supprimée avec succès.');
     }
+    public function checkMatches($demandeId)
+    {
+        $demande = Demande::find($demandeId);
+    
+        $typeProduit = $demande->type_produit;
+        $quantiteDemande = $demande->quantite;
+    
+        $produitsEnStock = Product::where('name', $typeProduit)
+                                  ->where('quantity', '>=', $quantiteDemande)
+                                  ->where('stock_status', 'disponible')
+                                  ->get();
+    
+        // Envoyer une notification si des produits correspondants sont trouvés
+        if ($produitsEnStock->count() > 0) {
+            $demande->benificaire->notify(new DemandeMatched($demande));
+        }
+    
+        return view('demandes.match', compact('demande', 'produitsEnStock'));
+    }
+    public function calculerPriorite(Demande $demande)
+{
+    $priorite = 0;
+
+    // Facteur 1: Urgence (exemple: "quotidien" a plus de priorité)
+    if ($demande->frequence_besoin == 'quotidien') {
+        $priorite += 3;
+    } elseif ($demande->frequence_besoin == 'hebdomadaire') {
+        $priorite += 2;
+    } else {
+        $priorite += 1;
+    }
+
+    
+    if ($demande->benificaire->type == 'Grande Association') {
+        $priorite += 2;
+    } elseif ($demande->benificaire->type == 'Petite Organisation') {
+        $priorite += 1;
+    }
+
+   
+    if (in_array($demande->type_produit, ['Lait', 'Riz', 'Eau'])) {
+        $priorite += 3;
+    }
+    $demande->priorite = $priorite;
+    $demande->save();
+}
+
+    
 }
