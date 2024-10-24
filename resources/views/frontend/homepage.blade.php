@@ -84,6 +84,7 @@
   
     @yield('content')
     <div class="container my-5">
+      
       <h2 class="text-center mb-4">Formulaire de Prise en Charge</h2>
   
       @if ($errors->any())
@@ -135,8 +136,6 @@
           <button type="submit" class="btn btn-primary btn-block">Soumettre</button>
       </form>
   </div>
-<div id="map" style="height: 400px; margin: 20px 0;"></div>
-
 <footer class="footer">
   <div class="container">
     <div class="row mb-5">

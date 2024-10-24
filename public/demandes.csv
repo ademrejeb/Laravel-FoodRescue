@@ -1,0 +1,4 @@
+"Type de Produit",Quantité,"Fréquence de Besoin",Statut,Bénéficiaire,"Date de Création"
+Riz,45,quotidien,"en attente","Organisation 1","2024-10-24 11:53:49"
+Lait,45,hebdomadaire,"en attente",Organi2,"2024-10-24 12:25:05"
+Eau,50,hebdomadaire,"en attente","Organisation 1","2024-10-24 15:20:43"

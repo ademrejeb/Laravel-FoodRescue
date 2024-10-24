@@ -39,9 +39,9 @@ class TransporteurController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom' => 'required',
-            'telephone' => 'required',
-            'email' => 'required',
+           'nom' => 'required|string',         
+           'telephone' => 'required|numeric',  
+           'email' => 'required|email', 
         ]);
 
         Transporteur::create($request->all());
@@ -82,9 +82,9 @@ class TransporteurController extends Controller
     public function update(Request $request, Transporteur $transporteur)
     {
         $request->validate([
-            'nom' => 'required',
-            'telephone' => 'required',
-            'email' => 'required',
+            'nom' => 'required|string',         
+            'telephone' => 'required|numeric',  
+            'email' => 'required|email', 
         ]);
 
         $transporteur->update($request->all());

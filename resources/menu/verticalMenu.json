@@ -216,6 +216,23 @@
           "slug": "vehicules"
         }
       ]
+    },
+    {
+      "name": "Company ",
+      "icon": "menu-icon tf-icons bx bx-cube-alt",
+      "slug": "Camp",
+      "submenu": [
+        {
+          "url": "campagnes",
+          "name": "campagnes",
+          "slug": "campagnes"
+        },
+        {
+          "url": "contributions",
+          "name": "contributions",
+          "slug": "contributions"
+        }
+      ]
     }
   ]
 }

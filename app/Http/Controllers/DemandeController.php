@@ -6,7 +6,9 @@ use App\Models\Demande;
 use App\Models\Benificaire;
 use App\Models\Product;
 use App\Notifications\DemandeMatched;
+use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class DemandeController extends Controller
 {
@@ -126,4 +128,51 @@ class DemandeController extends Controller
         $demande->priorite = $priorite;
         $demande->save();
     }
+    public function exportPDF()
+{
+    // Récupérer toutes les demandes avec les bénéficiaires
+    $demandes = Demande::with('benificaire')->get();
+    
+    // Charger la vue PDF avec les données des demandes
+    $pdf = PDF::loadView('demandes.pdf', compact('demandes'));
+    
+    // Retourner le téléchargement du fichier PDF
+    return $pdf->download('demandes.pdf');
+}
+
+
+    // Export CSV
+    public function exportCSV()
+    {
+        // Récupérer toutes les demandes avec les bénéficiaires
+        $demandes = Demande::with('benificaire')->get();
+        
+        // Nom du fichier CSV
+        $filename = "demandes.csv";
+        
+        // Ouvrir le fichier pour écrire
+        $handle = fopen($filename, 'w+');
+        
+        // Écrire les en-têtes des colonnes
+        fputcsv($handle, ['Type de Produit', 'Quantité', 'Fréquence de Besoin', 'Statut', 'Bénéficiaire', 'Date de Création']);
+        
+        // Boucle à travers les demandes pour les écrire dans le CSV
+        foreach ($demandes as $demande) {
+            fputcsv($handle, [
+                $demande->type_produit, 
+                $demande->quantite, 
+                $demande->frequence_besoin,
+                $demande->statut, 
+                $demande->benificaire->nom, // Assurez-vous que 'nom' est correct
+                $demande->created_at->format('Y-m-d H:i:s') // Format de date, si nécessaire
+            ]);
+        }
+    
+        // Fermer le fichier
+        fclose($handle);
+    
+        // Retourner le téléchargement du fichier CSV
+        return Response::download($filename, $filename, ['Content-Type' => 'text/csv']);
+    }
+    
 }

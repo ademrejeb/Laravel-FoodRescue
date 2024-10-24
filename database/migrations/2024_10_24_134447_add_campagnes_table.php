@@ -9,13 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('vehicules', function (Blueprint $table) {
+        Schema::create('campagnes', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->integer('capacite');
-            $table->string('disponibilite');
+            $table->string('nom');
+            $table->date('date_debut');
+            $table->date('date_fin');
+            $table->integer('objectif_quantite');
+            $table->enum('statut', ['active', 'inactive']);
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicules');
+        Schema::dropIfExists('campagnes');
     }
 };

@@ -46,7 +46,7 @@
                 <!-- Ajout d'un cachet pour le nom Foodrescue à droite avec forme circulaire -->
                 <div class="text-end my-4">
                     <h6>Cachet de l'Entreprise</h6>
-                    <img src="{{ asset('images/cachet_foodrescue.png') }}" alt="Cachet Foodrescue" style="max-width: 200px; height: auto; border-radius: 50%; border: 2px solid #000;">
+                    <img src="{{ asset('cachet_foodrescue.png') }}" alt="Cachet Foodrescue" style="max-width: 200px; height: auto; border-radius: 50%; border: 2px solid #000;">
                 </div>
 
                 <!-- Bouton pour télécharger le contrat -->

@@ -17,6 +17,7 @@ use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\authentications\ForgotPasswordBasic;
 use App\Http\Controllers\BenificaireController;
+use App\Http\Controllers\CampagneController;
 use App\Http\Controllers\cards\CardBasic;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
@@ -54,6 +55,7 @@ use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\SponsorshipController;
 
 use App\Http\Controllers\CollecteController;
+use App\Http\Controllers\ContributionController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivraisonController;
@@ -244,4 +246,8 @@ Route::prefix('offres')->middleware(['auth', 'verified','role:admin'])->group(fu
 Route::post('review-store', [OffreController::class,'reviewstore'])->name('review.store');
 Route::get('/demandes/{id}/match', [DemandeController::class, 'checkMatches'])->name('demandes.match');
 Route::get('/dashboardBenif', [BenificaireController::class, 'dashboard'])->middleware('auth')->name('dashboardBenif');
+Route::get('demandes/export/pdf', [DemandeController::class, 'exportPDF'])->name('demandes.export.pdf');
+Route::get('demandes/export/csv', [DemandeController::class, 'exportCSV'])->name('demandes.export.csv');
+Route::resource('campagnes', CampagneController::class);
+Route::resource('contributions', ContributionController::class);
 require __DIR__.'/auth.php';

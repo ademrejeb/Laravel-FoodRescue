@@ -9,6 +9,15 @@
 
 <div class="mb-3">
   <a href="{{ route('demandes.create') }}" class="btn btn-primary">Ajouter une demande</a>
+  <div>
+        <a href="{{ route('demandes.export.csv') }}" class="btn btn-outline-secondary" title="Exporter en CSV">
+            <i class="bx bx-file"></i>
+        </a>
+        <a href="{{ route('demandes.export.pdf') }}" class="btn btn-outline-danger" title="Exporter en PDF">
+            <i class="bx bxs-file-pdf"></i>
+        </a>
+        
+    </div>
 </div>
 
 <!-- Demandes Table -->
